@@ -12,9 +12,10 @@ TestingClawd/
 # Dependencies
 node_modules/
 
-# Build outputs
+# Build outputs - allow landing-page/dist for GitHub Pages
 dist/
 build/
+!landing-page/dist/
 
 # OS files
 .DS_Store
