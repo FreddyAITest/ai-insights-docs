@@ -416,5 +416,5 @@ Cache prefetching is used for continuous replication when write-optimized and re
 ## 📊 Metadata
 
 - **Total Sources:** 10
-- **Research Date:** 5.3.2026, 17:58:58
+- **Research Date:** 5.3.2026, 17:59:08
 - **API:** Tavily Search
