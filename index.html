@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Insights Documentation</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #2563eb;
+            --secondary: #0f172a;
+            --text: #334155;
+            --text-light: #64748b;
+            --bg: #ffffff;
+            --bg-light: #f8fafc;
+            --border: #e2e8f0;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: var(--text);
+            line-height: 1.6;
+            background: var(--bg);
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        header p {
+            font-size: 1.25rem;
+            opacity: 0.95;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Navigation */
+        nav {
+            background: white;
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav ul {
+            max-width: 1200px;
+            margin: 0 auto;
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        /* Main Content */
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        /* Guide Cards */
+        .guides-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .guide-card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 2rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+
+        .guide-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .guide-card h3 {
+            font-size: 1.5rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .guide-card p {
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+        }
+
+        .guide-card .tags {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 1.5rem;
+        }
+
+        .tag {
+            background: var(--bg-light);
+            color: var(--text-light);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        .guide-card a {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background 0.2s;
+        }
+
+        .guide-card a:hover {
+            background: #1d4ed8;
+        }
+
+        /* File Browser */
+        .file-browser {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+
+        .file-browser h2 {
+            font-size: 1.75rem;
+            color: var(--secondary);
+            margin-bottom: 1.5rem;
+        }
+
+        .file-list {
+            list-style: none;
+        }
+
+        .file-list li {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .file-list li:last-child {
+            border-bottom: none;
+        }
+
+        .file-icon {
+            font-size: 1.5rem;
+        }
+
+        .file-info {
+            flex: 1;
+        }
+
+        .file-name {
+            font-weight: 600;
+            color: var(--secondary);
+        }
+
+        .file-meta {
+            font-size: 0.875rem;
+            color: var(--text-light);
+        }
+
+        .file-actions a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            margin-left: 1rem;
+        }
+
+        .file-actions a:hover {
+            text-decoration: underline;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--secondary);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            margin-top: 4rem;
+        }
+
+        footer a {
+            color: #94a3b8;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            color: white;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2rem;
+            }
+
+            nav ul {
+                gap: 1rem;
+            }
+
+            .guides-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>🤖 AI Insights Documentation</h1>
+        <p>Complete guides for newsletter automation, research tools, and system setup</p>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#guides">Guides</a></li>
+            <li><a href="#files">All Files</a></li>
+            <li><a href="https://github.com/FreddyAITest/TestingClawd">GitHub</a></li>
+            <li><a href="https://silver-cheesecake-cd9dfd.netlify.app/">Website</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <!-- Featured Guides -->
+        <section id="guides">
+            <h2 style="font-size: 2rem; color: var(--secondary); margin-bottom: 1rem;">📚 Featured Guides</h2>
+            <p style="color: var(--text-light);">Everything you need to run your AI-powered newsletter and research automation</p>
+
+            <div class="guides-grid">
+                <!-- DNF Guide -->
+                <div class="guide-card">
+                    <h3>📦 DNF Package Manager Guide</h3>
+                    <p>Complete guide to installing software on AlmaLinux. Includes all popular development tools, databases, and DevOps tools.</p>
+                    <div class="tags">
+                        <span class="tag">Linux</span>
+                        <span class="tag">Package Manager</span>
+                        <span class="tag">Installation</span>
+                    </div>
+                    <a href="guides/DNF-GUIDE.html">Read Guide →</a>
+                </div>
+
+                <!-- Newsletter Setup -->
+                <div class="guide-card">
+                    <h3>📧 Newsletter Automation</h3>
+                    <p>Set up fully automated daily newsletters with Brevo. Includes cron jobs, API integration, and content generation.</p>
+                    <div class="tags">
+                        <span class="tag">Brevo</span>
+                        <span class="tag">Automation</span>
+                        <span class="tag">Cron</span>
+                    </div>
+                    <a href="guides/newsletter/SETUP-GUIDE.html">Read Guide →</a>
+                </div>
+
+                <!-- Research Automation -->
+                <div class="guide-card">
+                    <h3>🔍 Research Automation</h3>
+                    <p>Automated web research with Tavily API. Generate reports, export to Word/Markdown, and upload to Notion or GitHub.</p>
+                    <div class="tags">
+                        <span class="tag">Tavily</span>
+                        <span class="tag">Research</span>
+                        <span class="tag">API</span>
+                    </div>
+                    <a href="guides/research/FREE-SEARCH-APIS-2026.html">Read Guide →</a>
+                </div>
+
+                <!-- Notion Integration -->
+                <div class="guide-card">
+                    <h3>📔 Notion Integration</h3>
+                    <p>Connect your research to Notion. Automatic uploads, formatted pages, and searchable knowledge base.</p>
+                    <div class="tags">
+                        <span class="tag">Notion</span>
+                        <span class="tag">Integration</span>
+                        <span class="tag">Documentation</span>
+                    </div>
+                    <a href="guides/research/NOTION-SETUP.html">Read Guide →</a>
+                </div>
+
+                <!-- API Comparison -->
+                <div class="guide-card">
+                    <h3>🌐 Free Search APIs</h3>
+                    <p>Comparison of free web search APIs for research. Tavily, Serper, SerpAPI, Brave Search, and more.</p>
+                    <div class="tags">
+                        <span class="tag">APIs</span>
+                        <span class="tag">Comparison</span>
+                        <span class="tag">Free Tier</span>
+                    </div>
+                    <a href="guides/research/FREE-SEARCH-APIS-2026.html">Read Guide →</a>
+                </div>
+
+                <!-- GitHub Upload -->
+                <div class="guide-card">
+                    <h3>📤 GitHub Archive</h3>
+                    <p>Automatically upload research files to GitHub. Version control, easy access, and backup for all your documents.</p>
+                    <div class="tags">
+                        <span class="tag">GitHub</span>
+                        <span class="tag">Backup</span>
+                        <span class="tag">Version Control</span>
+                    </div>
+                    <a href="https://github.com/FreddyAITest/TestingClawd/tree/master/research-archive">View Archive →</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- File Browser -->
+        <section id="files" class="file-browser">
+            <h2>📁 All Documentation Files</h2>
+            <ul class="file-list">
+                <li>
+                    <span class="file-icon">📦</span>
+                    <div class="file-info">
+                        <div class="file-name">DNF-GUIDE.md</div>
+                        <div class="file-meta">Complete guide to DNF package manager • 7.7 KB</div>
+                    </div>
+                    <div class="file-actions">
+                        <a href="guides/DNF-GUIDE.html">View</a>
+                        <a href="https://github.com/FreddyAITest/TestingClawd/blob/master/docs/DNF-GUIDE.md" target="_blank">GitHub</a>
+                    </div>
+                </li>
+                <li>
+                    <span class="file-icon">📧</span>
+                    <div class="file-info">
+                        <div class="file-name">newsletter/SETUP-GUIDE.md</div>
+                        <div class="file-meta">Newsletter automation setup • 7.4 KB</div>
+                    </div>
+                    <div class="file-actions">
+                        <a href="guides/newsletter/SETUP-GUIDE.html">View</a>
+                        <a href="https://github.com/FreddyAITest/TestingClawd/blob/master/docs/newsletter/SETUP-GUIDE.md" target="_blank">GitHub</a>
+                    </div>
+                </li>
+                <li>
+                    <span class="file-icon">🔍</span>
+                    <div class="file-info">
+                        <div class="file-name">research/FREE-SEARCH-APIS-2026.md</div>
+                        <div class="file-meta">API comparison guide • 8.6 KB</div>
+                    </div>
+                    <div class="file-actions">
+                        <a href="guides/research/FREE-SEARCH-APIS-2026.html">View</a>
+                        <a href="https://github.com/FreddyAITest/TestingClawd/blob/master/docs/research/FREE-SEARCH-APIS-2026.md" target="_blank">GitHub</a>
+                    </div>
+                </li>
+                <li>
+                    <span class="file-icon">📔</span>
+                    <div class="file-info">
+                        <div class="file-name">research/NOTION-SETUP.md</div>
+                        <div class="file-meta">Notion integration guide • 6.2 KB</div>
+                    </div>
+                    <div class="file-actions">
+                        <a href="guides/research/NOTION-SETUP.html">View</a>
+                        <a href="https://github.com/FreddyAITest/TestingClawd/blob/master/docs/research/NOTION-SETUP.md" target="_blank">GitHub</a>
+                    </div>
+                </li>
+                <li>
+                    <span class="file-icon">🤖</span>
+                    <div class="file-info">
+                        <div class="file-name">research/research-automation.js</div>
+                        <div class="file-meta">Automated research script • 10.9 KB</div>
+                    </div>
+                    <div class="file-actions">
+                        <a href="https://github.com/FreddyAITest/TestingClawd/blob/master/research/research-automation.js" target="_blank">GitHub</a>
+                    </div>
+                </li>
+                <li>
+                    <span class="file-icon">📤</span>
+                    <div class="file-info">
+                        <div class="file-name">research/upload-to-github.js</div>
+                        <div class="file-meta">GitHub upload script • 2.6 KB</div>
+                    </div>
+                    <div class="file-actions">
+                        <a href="https://github.com/FreddyAITest/TestingClawd/blob/master/research/upload-to-github.js" target="_blank">GitHub</a>
+                    </div>
+                </li>
+            </ul>
+        </section>
+
+        <!-- Quick Links -->
+        <section style="margin-top: 3rem; text-align: center;">
+            <h2 style="font-size: 1.75rem; color: var(--secondary); margin-bottom: 1rem;">🚀 Quick Links</h2>
+            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                <a href="https://github.com/FreddyAITest/TestingClawd" style="display: inline-block; background: var(--secondary); color: white; padding: 1rem 2rem; border-radius: 8px; text-decoration: none; font-weight: 600;">GitHub Repository</a>
+                <a href="https://silver-cheesecake-cd9dfd.netlify.app/" style="display: inline-block; background: var(--primary); color: white; padding: 1rem 2rem; border-radius: 8px; text-decoration: none; font-weight: 600;">Newsletter Website</a>
+                <a href="https://app.brevo.com/" style="display: inline-block; background: #0b996e; color: white; padding: 1rem 2rem; border-radius: 8px; text-decoration: none; font-weight: 600;">Brevo Dashboard</a>
+                <a href="https://app.tavily.com/" style="display: inline-block; background: #0066ff; color: white; padding: 1rem 2rem; border-radius: 8px; text-decoration: none; font-weight: 600;">Tavily Dashboard</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2026 AI Insights Documentation. All rights reserved.</p>
+        <p style="margin-top: 0.5rem;">
+            <a href="https://github.com/FreddyAITest/TestingClawd">GitHub</a> •
+            <a href="https://silver-cheesecake-cd9dfd.netlify.app/">Website</a> •
+            <a href="mailto:newsletter@ai-insights.de">Contact</a>
+        </p>
+    </footer>
+</body>
+</html>
