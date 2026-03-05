@@ -8,6 +8,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Brevo Form Styles -->
+    <link rel="stylesheet" href="https://sibforms.com/forms/end-form/build/sib-styles.css">
     <style>
         * {
             margin: 0;
@@ -356,22 +359,53 @@
         <h1>Neueste KI-Projekte &<br>Innovationen entdecken</h1>
         <p>Erhalten Sie exklusive Einblicke in unsere neuesten Software-Projekte und KI-Innovationen direkt in Ihr Postfach.</p>
         
-        <form class="newsletter-form" id="newsletter-form" action="https://form.brevo.com" method="POST">
-            <!-- Replace YOUR_FORM_ID with your actual Brevo form ID -->
-            <input type="hidden" name="form_id" value="YOUR_FORM_ID">
-            <input type="hidden" name="locale" value="de">
-            
-            <input type="email" id="email" name="email" placeholder="Ihre E-Mail-Adresse" required aria-label="E-Mail-Adresse für Newsletter">
-            <button type="submit">Kostenlos anmelden</button>
-        </form>
+        <!-- Brevo Newsletter Form -->
+        <div class="sib-form" style="text-align: center;">
+            <div id="sib-container" class="sib-container--vertical" style="max-width:540px; margin: 0 auto;">
+                <form id="sib-form" method="POST" action="https://1b30e838.sibforms.com/serve/MUIFACzYNK980ANbLgaBgdz9rb7kM0cbd_FlarizsA9Pe2z_xTzPgHv4LdGrGNNfW1-AdkoS6-iqbE7XtrErU2Y48ovQ-3qGNUnRANCLgAdz6kHda7XFg4ht5U5ggUrLlbppC5g97xvkljU53tOh9eERXIHzJNfg2Cr1PxlcPaTaevGhIBuOuYjUvyQkFWEzloLS1UdhoBYmNf-dvQ==" data-type="subscription">
+                    <div style="padding: 8px 0;">
+                        <div class="sib-form-block" style="font-size:16px; font-family:Helvetica, sans-serif; color:#3C4858;">
+                            <p>Gib deine E-Mail-Adresse ein, um dich anzumelden</p>
+                        </div>
+                    </div>
+                    <div style="padding: 8px 0;">
+                        <div class="sib-input sib-form-block">
+                            <div class="form__entry entry_block">
+                                <div class="form__label-row">
+                                    <label class="entry__label" style="font-weight: 700; font-size:16px; color:#3c4858;" for="EMAIL" data-required="*">E-Mail-Adresse</label>
+                                    <div class="entry__field">
+                                        <input class="input" type="text" id="EMAIL" name="EMAIL" autocomplete="off" placeholder="deine@email.de" data-required="true" required style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 16px;" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- DSGVO Consent Checkbox -->
+                    <div style="padding: 8px 0; text-align: left; max-width: 500px; margin: 0 auto;">
+                        <label style="display: flex; align-items: flex-start; gap: 10px; font-size: 14px; color: #64748b; cursor: pointer;">
+                            <input type="checkbox" name="consent" required style="margin-top: 2px; flex-shrink: 0;" />
+                            <span>
+                                Ich habe die <a href="datenschutz.html" style="color: #2563eb; text-decoration: underline;">Datenschutzerklärung</a> gelesen und stimme zu, dass meine E-Mail-Adresse für den Newsletter-Versand gespeichert wird. Ich kann meine Einwilligung jederzeit widerrufen.
+                            </span>
+                        </label>
+                    </div>
+                    
+                    <div style="padding: 8px 0;">
+                        <button class="sib-form-block__button" style="width: 100%; padding: 14px; background: #0f172a; color: #FFFFFF; border: none; border-radius: 8px; font-size: 16px; font-weight: 700; cursor: pointer; font-family: inherit;" form="sib-form" type="submit">
+                            KOSTENLOS ANMELDEN
+                        </button>
+                    </div>
+                    
+                    <input type="text" name="email_address_check" value="" class="input--hidden">
+                    <input type="hidden" name="locale" value="de">
+                </form>
+            </div>
+        </div>
         
-        <p class="consent-text">
-            Mit Ihrer Anmeldung erklären Sie sich mit der Verarbeitung Ihrer Daten gemäß unserer 
-            <a href="datenschutz.html">Datenschutzerklärung</a> einverstanden. 
-            Abmeldung jederzeit möglich.
+        <p class="consent-text" style="margin-top: 1.5rem; font-size: 0.875rem; color: #94a3b8;">
+            🔒 DSGVO-konform mit Double Opt-In. Abmeldung jederzeit möglich.
         </p>
-        
-        <div id="form-message" style="display: none; margin-top: 1rem; padding: 1rem; border-radius: 8px; max-width: 500px; margin-left: auto; margin-right: auto;"></div>
     </section>
 
     <!-- Projects Section -->
@@ -493,60 +527,27 @@
         </div>
     </footer>
 
+    <!-- Brevo Form Scripts -->
     <script>
-        // Form submission handler for Brevo
-        const form = document.getElementById('newsletter-form');
-        const formMessage = document.getElementById('form-message');
-
-        if (form) {
-            form.addEventListener('submit', function(e) {
-                e.preventDefault();
-                
-                const email = document.getElementById('email').value;
-                const submitBtn = form.querySelector('button[type="submit"]');
-                const originalBtnText = submitBtn.textContent;
-                
-                // Show loading state
-                submitBtn.disabled = true;
-                submitBtn.textContent = 'Wird gesendet...';
-                formMessage.style.display = 'none';
-                
-                // Submit to Brevo
-                fetch(form.action, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded',
-                    },
-                    body: new URLSearchParams(new FormData(form))
-                })
-                .then(response => {
-                    if (response.ok) {
-                        // Success - Double Opt-In sent
-                        formMessage.style.display = 'block';
-                        formMessage.style.background = '#d1fae5';
-                        formMessage.style.color = '#065f46';
-                        formMessage.innerHTML = '✅ <strong>Vielen Dank!</strong> Bitte bestätigen Sie Ihre E-Mail-Adresse durch Klick auf den Link in der Bestätigungs-E-Mail, die Sie gleich erhalten werden.';
-                        form.reset();
-                    } else {
-                        // Error
-                        throw new Error('Submission failed');
-                    }
-                })
-                .catch(error => {
-                    formMessage.style.display = 'block';
-                    formMessage.style.background = '#fee2e2';
-                    formMessage.style.color = '#991b1b';
-                    formMessage.innerHTML = '❌ <strong>Fehler:</strong> Bitte versuchen Sie es später erneut oder kontaktieren Sie uns direkt.';
-                    console.error('Newsletter error:', error);
-                })
-                .finally(() => {
-                    submitBtn.disabled = false;
-                    submitBtn.textContent = originalBtnText;
-                });
-            });
-        }
-
-        // Smooth scroll for anchor links
+        window.REQUIRED_CODE_ERROR_MESSAGE = 'Wähle bitte einen Ländervorwahl aus.';
+        window.LOCALE = 'de';
+        window.EMAIL_INVALID_MESSAGE = window.SMS_INVALID_MESSAGE = "Die eingegebenen Informationen sind nicht gültig. Bitte überprüfe das Feldformat und versuche es erneut.";
+        window.REQUIRED_ERROR_MESSAGE = "Dieses Feld darf nicht leer sein. ";
+        window.GENERIC_INVALID_MESSAGE = "Die eingegebenen Informationen sind nicht gültig. Bitte überprüfe das Feldformat und versuche es erneut.";
+        window.translation = {
+            common: {
+                selectedList: '{quantity} Liste ausgewählt',
+                selectedLists: '{quantity} Listen ausgewählt',
+                selectedOption: '{quantity} ausgewählt',
+                selectedOptions: '{quantity} ausgewählt',
+            }
+        };
+        var AUTOHIDE = Boolean(0);
+    </script>
+    <script defer src="https://sibforms.com/forms/end-form/build/main.js"></script>
+    
+    <!-- Smooth scroll for anchor links -->
+    <script>
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 e.preventDefault();
