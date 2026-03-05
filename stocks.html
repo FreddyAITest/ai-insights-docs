@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📈 ETF Dashboard - AI Insights Documentation</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #2563eb;
+            --secondary: #0f172a;
+            --text: #334155;
+            --text-light: #64748b;
+            --bg: #ffffff;
+            --bg-light: #f8fafc;
+            --border: #e2e8f0;
+            --success: #10b981;
+            --danger: #ef4444;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: var(--text);
+            line-height: 1.6;
+            background: var(--bg);
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            opacity: 0.95;
+        }
+
+        /* Navigation */
+        nav {
+            background: white;
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav ul {
+            max-width: 1200px;
+            margin: 0 auto;
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        /* Main Content */
+        main {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Last Updated */
+        .last-updated {
+            text-align: center;
+            color: var(--text-light);
+            font-size: 0.875rem;
+            margin-bottom: 2rem;
+        }
+
+        /* ETF Cards Grid */
+        .etf-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .etf-card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .etf-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .etf-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .etf-title h3 {
+            font-size: 1.25rem;
+            color: var(--secondary);
+            margin-bottom: 0.25rem;
+        }
+
+        .etf-ticker {
+            font-size: 0.875rem;
+            color: var(--text-light);
+            font-family: monospace;
+        }
+
+        .etf-price {
+            text-align: right;
+        }
+
+        .price {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--secondary);
+        }
+
+        .change {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-top: 0.25rem;
+        }
+
+        .change.positive {
+            color: var(--success);
+        }
+
+        .change.negative {
+            color: var(--danger);
+        }
+
+        /* Chart Container */
+        .chart-container {
+            position: relative;
+            height: 300px;
+            margin: 1.5rem 0;
+        }
+
+        /* Time Period Buttons */
+        .time-buttons {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .time-btn {
+            background: var(--bg-light);
+            border: 1px solid var(--border);
+            color: var(--text);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .time-btn:hover {
+            background: var(--border);
+        }
+
+        .time-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        /* Loading State */
+        .loading {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 300px;
+            color: var(--text-light);
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid var(--border);
+            border-top-color: var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Error State */
+        .error {
+            background: #fef2f2;
+            border: 1px solid #fecaca;
+            color: #dc2626;
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--secondary);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            margin-top: 4rem;
+        }
+
+        footer a {
+            color: #94a3b8;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            color: white;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2rem;
+            }
+
+            nav ul {
+                gap: 1rem;
+            }
+
+            .etf-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .etf-header {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .etf-price {
+                text-align: left;
+            }
+
+            .chart-container {
+                height: 250px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>📈 ETF Dashboard</h1>
+        <p>Live stock prices and interactive charts for global ETFs</p>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="index.html">🏠 Home</a></li>
+            <li><a href="#dashboard">Dashboard</a></li>
+            <li><a href="https://github.com/FreddyAITest/TestingClawd">GitHub</a></li>
+            <li><a href="https://silver-cheesecake-cd9dfd.netlify.app/">Website</a></li>
+        </ul>
+    </nav>
+
+    <main id="dashboard">
+        <div class="last-updated">
+            Last updated: <span id="lastUpdated">Loading...</span>
+            <button onclick="refreshData()" class="time-btn" style="margin-left: 1rem;">🔄 Refresh</button>
+        </div>
+
+        <div class="etf-grid">
+            <!-- MSCI World ETF -->
+            <div class="etf-card" id="card-IWDA.AS">
+                <div class="etf-header">
+                    <div class="etf-title">
+                        <h3>MSCI World</h3>
+                        <div class="etf-ticker">IWDA.AS</div>
+                    </div>
+                    <div class="etf-price">
+                        <div class="price" id="price-IWDA.AS">--</div>
+                        <div class="change" id="change-IWDA.AS">--</div>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <canvas id="chart-IWDA.AS"></canvas>
+                </div>
+                <div class="time-buttons">
+                    <button class="time-btn" data-period="1d">1D</button>
+                    <button class="time-btn" data-period="5d">5D</button>
+                    <button class="time-btn" data-period="1mo">1M</button>
+                    <button class="time-btn" data-period="3mo">3M</button>
+                    <button class="time-btn" data-period="6mo">6M</button>
+                    <button class="time-btn" data-period="1y">1Y</button>
+                    <button class="time-btn" data-period="5y">5Y</button>
+                    <button class="time-btn" data-period="max">MAX</button>
+                </div>
+            </div>
+
+            <!-- FTSE All-World ETF -->
+            <div class="etf-card" id="card-VWRL.L">
+                <div class="etf-header">
+                    <div class="etf-title">
+                        <h3>FTSE All-World</h3>
+                        <div class="etf-ticker">VWRL.L</div>
+                    </div>
+                    <div class="etf-price">
+                        <div class="price" id="price-VWRL.L">--</div>
+                        <div class="change" id="change-VWRL.L">--</div>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <canvas id="chart-VWRL.L"></canvas>
+                </div>
+                <div class="time-buttons">
+                    <button class="time-btn" data-period="1d">1D</button>
+                    <button class="time-btn" data-period="5d">5D</button>
+                    <button class="time-btn" data-period="1mo">1M</button>
+                    <button class="time-btn" data-period="3mo">3M</button>
+                    <button class="time-btn" data-period="6mo">6M</button>
+                    <button class="time-btn" data-period="1y">1Y</button>
+                    <button class="time-btn" data-period="5y">5Y</button>
+                    <button class="time-btn" data-period="max">MAX</button>
+                </div>
+            </div>
+
+            <!-- High Dividend ETF -->
+            <div class="etf-card" id="card-IDVY.L">
+                <div class="etf-header">
+                    <div class="etf-title">
+                        <h3>High Dividend</h3>
+                        <div class="etf-ticker">IDVY.L</div>
+                    </div>
+                    <div class="etf-price">
+                        <div class="price" id="price-IDVY.L">--</div>
+                        <div class="change" id="change-IDVY.L">--</div>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <canvas id="chart-IDVY.L"></canvas>
+                </div>
+                <div class="time-buttons">
+                    <button class="time-btn" data-period="1d">1D</button>
+                    <button class="time-btn" data-period="5d">5D</button>
+                    <button class="time-btn" data-period="1mo">1M</button>
+                    <button class="time-btn" data-period="3mo">3M</button>
+                    <button class="time-btn" data-period="6mo">6M</button>
+                    <button class="time-btn" data-period="1y">1Y</button>
+                    <button class="time-btn" data-period="5y">5Y</button>
+                    <button class="time-btn" data-period="max">MAX</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Info Section -->
+        <div style="background: white; border: 1px solid var(--border); border-radius: 12px; padding: 2rem; margin-top: 2rem;">
+            <h2 style="font-size: 1.5rem; color: var(--secondary); margin-bottom: 1rem;">ℹ️ About This Dashboard</h2>
+            <div style="color: var(--text-light); line-height: 1.8;">
+                <p style="margin-bottom: 1rem;">
+                    This dashboard displays real-time ETF prices and historical charts. Data is fetched from Yahoo Finance 
+                    and cached locally, updating automatically every 24 hours.
+                </p>
+                <h3 style="font-size: 1.1rem; color: var(--secondary); margin: 1.5rem 0 0.5rem;">ETFs Tracked:</h3>
+                <ul style="margin-left: 1.5rem; margin-bottom: 1rem;">
+                    <li><strong>IWDA.AS</strong> - iShares Core MSCI World UCITS ETF (Developed markets worldwide)</li>
+                    <li><strong>VWRL.L</strong> - Vanguard FTSE All-World UCITS ETF (Global stocks including emerging markets)</li>
+                    <li><strong>IDVY.L</strong> - iShares Euro Dividend UCITS ETF (High dividend European stocks)</li>
+                </ul>
+                <h3 style="font-size: 1.1rem; color: var(--secondary); margin: 1.5rem 0 0.5rem;">Data Updates:</h3>
+                <p>
+                    Data is automatically updated daily at 6:00 AM UTC. Click the <strong>Refresh</strong> button to manually 
+                    reload the latest cached data. Charts are interactive - hover over data points to see exact prices.
+                </p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>© 2026 AI Insights Documentation. All rights reserved.</p>
+        <p style="margin-top: 0.5rem;">
+            <a href="https://github.com/FreddyAITest/TestingClawd">GitHub</a> •
+            <a href="https://silver-cheesecake-cd9dfd.netlify.app/">Website</a> •
+            <a href="index.html">Documentation</a>
+        </p>
+    </footer>
+
+    <script>
+        // ETF Configuration
+        const ETFS = ['IWDA.AS', 'VWRL.L', 'IDVY.L'];
+        const CURRENCY_SYMBOLS = {
+            'IWDA.AS': '€',
+            'VWRL.L': '$',
+            'IDVY.L': '€'
+        };
+        
+        // Chart instances
+        const charts = {};
+        
+        // Default period
+        const DEFAULT_PERIOD = '6mo';
+
+        // Initialize all charts
+        async function initDashboard() {
+            for (const ticker of ETFS) {
+                await loadETFData(ticker, DEFAULT_PERIOD);
+                setupTimeButtons(ticker);
+            }
+            updateLastUpdated();
+        }
+
+        // Load ETF data and create/update chart
+        async function loadETFData(ticker, period) {
+            try {
+                const cachePeriod = period === '1d' ? '1d' : 
+                                   period === '5d' ? '5d' :
+                                   period === '1mo' ? '1mo' :
+                                   period === '3mo' ? '3mo' :
+                                   period === '6mo' ? '6mo' :
+                                   period === '1y' ? '1y' :
+                                   period === '5y' ? '5y' : 'max';
+                
+                const response = await fetch(`stock-dashboard/cache/${ticker}_${cachePeriod}.json`);
+                
+                if (!response.ok) {
+                    throw new Error(`Failed to load data for ${ticker}`);
+                }
+                
+                const data = await response.json();
+                
+                // Update price display
+                updatePriceDisplay(ticker, data);
+                
+                // Create or update chart
+                createOrUpdateChart(ticker, data);
+                
+                // Update active button
+                document.querySelectorAll(`#card-${ticker} .time-btn`).forEach(btn => {
+                    btn.classList.remove('active');
+                    if (btn.dataset.period === period) {
+                        btn.classList.add('active');
+                    }
+                });
+                
+            } catch (error) {
+                console.error(`Error loading ${ticker} ${period}:`, error);
+                showError(ticker, error.message);
+            }
+        }
+
+        // Update price and change display
+        function updatePriceDisplay(ticker, data) {
+            const priceEl = document.getElementById(`price-${ticker}`);
+            const changeEl = document.getElementById(`change-${ticker}`);
+            
+            const price = data.current_price;
+            const change = data.price_change;
+            const changePercent = data.price_change_percent;
+            const currency = CURRENCY_SYMBOLS[ticker] || '$';
+            
+            priceEl.textContent = `${currency}${price?.toFixed(2) || '--'}`;
+            
+            if (change !== undefined && changePercent !== undefined) {
+                const sign = change >= 0 ? '+' : '';
+                changeEl.textContent = `${sign}${changePercent.toFixed(2)}%`;
+                changeEl.className = `change ${change >= 0 ? 'positive' : 'negative'}`;
+            } else {
+                changeEl.textContent = '--';
+                changeEl.className = 'change';
+            }
+        }
+
+        // Create or update Chart.js chart
+        function createOrUpdateChart(ticker, data) {
+            const ctx = document.getElementById(`chart-${ticker}`).getContext('2d');
+            
+            // Destroy existing chart if it exists
+            if (charts[ticker]) {
+                charts[ticker].destroy();
+            }
+            
+            // Prepare data
+            const dates = data.dates || [];
+            const prices = data.prices || [];
+            
+            // Create gradient
+            const gradient = ctx.createLinearGradient(0, 0, 0, 300);
+            gradient.addColorStop(0, 'rgba(37, 99, 235, 0.2)');
+            gradient.addColorStop(1, 'rgba(37, 99, 235, 0.0)');
+            
+            // Create chart
+            charts[ticker] = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: dates,
+                    datasets: [{
+                        label: `${data.name} (${ticker})`,
+                        data: prices,
+                        borderColor: 'rgb(37, 99, 235)',
+                        backgroundColor: gradient,
+                        fill: true,
+                        tension: 0.4,
+                        pointRadius: 0,
+                        pointHoverRadius: 6,
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    interaction: {
+                        mode: 'index',
+                        intersect: false,
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            backgroundColor: 'rgba(15, 23, 42, 0.9)',
+                            titleColor: 'white',
+                            bodyColor: 'white',
+                            borderColor: 'rgba(255, 255, 255, 0.1)',
+                            borderWidth: 1,
+                            padding: 12,
+                            displayColors: false,
+                            callbacks: {
+                                label: function(context) {
+                                    const currency = CURRENCY_SYMBOLS[ticker] || '$';
+                                    return `${currency}${context.parsed.y.toFixed(2)}`;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            display: true,
+                            grid: {
+                                display: false
+                            },
+                            ticks: {
+                                maxRotation: 0,
+                                autoSkip: true,
+                                maxTicksLimit: 8
+                            }
+                        },
+                        y: {
+                            display: true,
+                            grid: {
+                                color: 'rgba(226, 232, 240, 0.5)'
+                            },
+                            ticks: {
+                                callback: function(value) {
+                                    const currency = CURRENCY_SYMBOLS[ticker] || '$';
+                                    return `${currency}${value.toFixed(0)}`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Setup time period button listeners
+        function setupTimeButtons(ticker) {
+            const card = document.getElementById(`card-${ticker}`);
+            const buttons = card.querySelectorAll('.time-btn');
+            
+            buttons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const period = btn.dataset.period;
+                    loadETFData(ticker, period);
+                });
+            });
+        }
+
+        // Show error message
+        function showError(ticker, message) {
+            const chartContainer = document.querySelector(`#chart-${ticker}`).parentElement;
+            chartContainer.innerHTML = `
+                <div class="error">
+                    <strong>Error loading data</strong><br>
+                    ${message}
+                </div>
+            `;
+        }
+
+        // Update last updated timestamp
+        function updateLastUpdated() {
+            const now = new Date();
+            const options = { 
+                weekday: 'short', 
+                year: 'numeric', 
+                month: 'short', 
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            };
+            document.getElementById('lastUpdated').textContent = now.toLocaleDateString('en-US', options);
+        }
+
+        // Refresh data
+        function refreshData() {
+            initDashboard();
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', initDashboard);
+    </script>
+</body>
+</html>
