@@ -1,3 +1,7 @@
+#!/bin/bash
+
+# Create proper HTML for Newsletter Guide
+cat > docs/newsletter/SETUP-GUIDE.html << 'HTML'
 <!DOCTYPE html>
 <html lang="de">
 <head>
@@ -104,3 +108,6 @@ node send-daily.js</code></pre>
     </div>
 </body>
 </html>
+HTML
+
+echo "✅ Newsletter guide created"

@@ -3,119 +3,104 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Documentation</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <title>Notion Integration Setup - AI Insights</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: 'Inter', sans-serif;
-            line-height: 1.6;
-            color: #334155;
-            background: #ffffff;
-            padding: 2rem;
-        }
+        body { font-family: 'Inter', sans-serif; line-height: 1.6; color: #334155; background: #ffffff; padding: 2rem; }
         .container { max-width: 900px; margin: 0 auto; }
-        header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 3rem 2rem;
-            border-radius: 12px;
-            margin-bottom: 2rem;
-        }
+        header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 3rem 2rem; border-radius: 12px; margin-bottom: 2rem; }
         header h1 { font-size: 2rem; margin-bottom: 0.5rem; }
-        header a { color: white; text-decoration: none; }
-        header a:hover { text-decoration: underline; }
         nav { margin-bottom: 2rem; }
-        nav a {
-            display: inline-block;
-            background: #f8fafc;
-            color: #2563eb;
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 500;
-            margin-right: 0.5rem;
-            transition: background 0.2s;
-        }
+        nav a { display: inline-block; background: #f8fafc; color: #2563eb; padding: 0.5rem 1rem; border-radius: 8px; text-decoration: none; font-weight: 500; margin-right: 0.5rem; }
         nav a:hover { background: #e2e8f0; }
         h1 { color: #0f172a; border-bottom: 2px solid #2563eb; padding-bottom: 0.5rem; margin: 2rem 0 1rem; }
         h2 { color: #0f172a; margin: 2rem 0 1rem; font-size: 1.5rem; }
-        h3 { color: #334155; margin: 1.5rem 0 0.75rem; font-size: 1.25rem; }
-        h4 { color: #64748b; margin: 1rem 0 0.5rem; font-size: 1rem; }
+        h3 { color: #334155; margin: 1.5rem 0 0.75rem; }
         a { color: #2563eb; text-decoration: none; }
         a:hover { text-decoration: underline; }
         p { margin-bottom: 1rem; }
         ul, ol { margin-left: 2rem; margin-bottom: 1rem; }
         li { margin-bottom: 0.5rem; }
-        pre {
-            background: #f8fafc;
-            padding: 1rem;
-            border-radius: 8px;
-            overflow-x: auto;
-            border: 1px solid #e2e8f0;
-            margin-bottom: 1rem;
-        }
-        code {
-            background: #f8fafc;
-            padding: 0.2rem 0.4rem;
-            border-radius: 4px;
-            font-size: 0.9em;
-            border: 1px solid #e2e8f0;
-        }
+        pre { background: #f8fafc; padding: 1rem; border-radius: 8px; overflow-x: auto; border: 1px solid #e2e8f0; margin-bottom: 1rem; }
+        code { background: #f8fafc; padding: 0.2rem 0.4rem; border-radius: 4px; }
         pre code { background: none; padding: 0; border: none; }
-        table {
-            border-collapse: collapse;
-            width: 100%;
-            margin: 1rem 0;
-            border: 1px solid #e2e8f0;
-            border-radius: 8px;
-            overflow: hidden;
-        }
-        th, td {
-            border: 1px solid #e2e8f0;
-            padding: 0.75rem;
-            text-align: left;
-        }
-        th {
-            background: #f8fafc;
-            font-weight: 600;
-            color: #0f172a;
-        }
-        tr:nth-child(even) { background: #f8fafc; }
-        blockquote {
-            border-left: 4px solid #2563eb;
-            padding-left: 1rem;
-            margin: 1rem 0;
-            color: #64748b;
-        }
-        hr {
-            border: none;
-            border-top: 1px solid #e2e8f0;
-            margin: 2rem 0;
-        }
-        .back-link {
-            display: inline-block;
-            margin-bottom: 2rem;
-            background: #2563eb;
-            color: white;
-            padding: 0.75rem 1.5rem;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 600;
-        }
+        .step { background: #f8fafc; padding: 1.5rem; border-radius: 8px; margin: 1.5rem 0; border-left: 4px solid #2563eb; }
+        .back-link { display: inline-block; margin-bottom: 2rem; background: #2563eb; color: white; padding: 0.75rem 1.5rem; border-radius: 8px; text-decoration: none; font-weight: 600; }
         .back-link:hover { background: #1d4ed8; text-decoration: none; }
     </style>
 </head>
 <body>
     <div class="container">
-        <a href="../index.html" class="back-link">← Back to Documentation</a>
-        <nav style="margin-bottom: 2rem;">
-            <a href="../index.html">🏠 Home</a>
+        <a href="../../index.html" class="back-link">← Back to Documentation</a>
+        <nav>
+            <a href="../../index.html">🏠 Home</a>
             <a href="https://github.com/FreddyAITest/ai-insights-docs">GitHub</a>
-            <a href="https://illustrious-parfait-00e2cf.netlify.app/">Live Site</a>
         </nav>
+
+        <header>
+            <h1>📔 Notion Integration Setup</h1>
+            <p>Auto-upload research to your Notion workspace</p>
+        </header>
+
+        <div class="step">
+            <h2>🔑 STEP 1: Create Notion Integration</h2>
+            <ol>
+                <li>Go to <a href="https://www.notion.com/my-integrations" target="_blank">notion.com/my-integrations</a></li>
+                <li>Click "+ New integration"</li>
+                <li>Name: "AI Research Automation"</li>
+                <li>Enable: Read, Update, Insert content</li>
+                <li>Copy Internal Integration Token (starts with <code>secret_</code>)</li>
+            </ol>
+        </div>
+
+        <div class="step">
+            <h2>📄 STEP 2: Create Page in Notion</h2>
+            <ol>
+                <li>Open Notion</li>
+                <li>Create new page: "AI Research Archive"</li>
+                <li>Click "..." → "Connect to" → Select your integration</li>
+            </ol>
+        </div>
+
+        <div class="step">
+            <h2>🔗 STEP 3: Get Page ID</h2>
+            <ol>
+                <li>Open your page in Notion</li>
+                <li>Click "..." → "Copy link"</li>
+                <li>Extract ID from URL: <code>https://notion.so/your-workspace/abc123def456</code></li>
+                <li>ID is: <code>abc123def456</code></li>
+            </ol>
+        </div>
+
+        <div class="step">
+            <h2>⚙️ STEP 4: Update .env</h2>
+            <pre><code>NOTION_API_KEY=secret_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+NOTION_PAGE_ID=abc123def456</code></pre>
+        </div>
+
+        <div class="step">
+            <h2>🧪 STEP 5: Test Connection</h2>
+            <pre><code>cd /root/.openclaw/workspace/research
+export $(cat ../.env | grep -v '^#' | xargs)
+node test-notion.js</code></pre>
+        </div>
+
+        <h2>🚀 Run Research with Notion Upload</h2>
+        <pre><code>node research-automation.js "Your research topic"</code></pre>
+        <p>The script will automatically upload to Notion!</p>
+
+        <h2>📊 What Gets Uploaded</h2>
+        <ul>
+            <li>Research topic title</li>
+            <li>Date and summary</li>
+            <li>All findings with sources</li>
+            <li>Metadata (sources count, date, API used)</li>
+        </ul>
+
+        <p style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #e2e8f0; color: #64748b;">
+            <strong>Need help?</strong> Check <code>test-notion.js</code> or the logs! 🚀
+        </p>
     </div>
 </body>
 </html>

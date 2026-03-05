@@ -3,119 +3,104 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Documentation</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <title>Free Search APIs Comparison - AI Insights</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: 'Inter', sans-serif;
-            line-height: 1.6;
-            color: #334155;
-            background: #ffffff;
-            padding: 2rem;
-        }
+        body { font-family: 'Inter', sans-serif; line-height: 1.6; color: #334155; background: #ffffff; padding: 2rem; }
         .container { max-width: 900px; margin: 0 auto; }
-        header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 3rem 2rem;
-            border-radius: 12px;
-            margin-bottom: 2rem;
-        }
+        header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 3rem 2rem; border-radius: 12px; margin-bottom: 2rem; }
         header h1 { font-size: 2rem; margin-bottom: 0.5rem; }
-        header a { color: white; text-decoration: none; }
-        header a:hover { text-decoration: underline; }
         nav { margin-bottom: 2rem; }
-        nav a {
-            display: inline-block;
-            background: #f8fafc;
-            color: #2563eb;
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 500;
-            margin-right: 0.5rem;
-            transition: background 0.2s;
-        }
+        nav a { display: inline-block; background: #f8fafc; color: #2563eb; padding: 0.5rem 1rem; border-radius: 8px; text-decoration: none; font-weight: 500; margin-right: 0.5rem; }
         nav a:hover { background: #e2e8f0; }
         h1 { color: #0f172a; border-bottom: 2px solid #2563eb; padding-bottom: 0.5rem; margin: 2rem 0 1rem; }
         h2 { color: #0f172a; margin: 2rem 0 1rem; font-size: 1.5rem; }
-        h3 { color: #334155; margin: 1.5rem 0 0.75rem; font-size: 1.25rem; }
-        h4 { color: #64748b; margin: 1rem 0 0.5rem; font-size: 1rem; }
+        h3 { color: #334155; margin: 1.5rem 0 0.75rem; }
         a { color: #2563eb; text-decoration: none; }
         a:hover { text-decoration: underline; }
         p { margin-bottom: 1rem; }
-        ul, ol { margin-left: 2rem; margin-bottom: 1rem; }
+        ul { margin-left: 2rem; margin-bottom: 1rem; }
         li { margin-bottom: 0.5rem; }
-        pre {
-            background: #f8fafc;
-            padding: 1rem;
-            border-radius: 8px;
-            overflow-x: auto;
-            border: 1px solid #e2e8f0;
-            margin-bottom: 1rem;
-        }
-        code {
-            background: #f8fafc;
-            padding: 0.2rem 0.4rem;
-            border-radius: 4px;
-            font-size: 0.9em;
-            border: 1px solid #e2e8f0;
-        }
+        pre { background: #f8fafc; padding: 1rem; border-radius: 8px; overflow-x: auto; border: 1px solid #e2e8f0; margin-bottom: 1rem; }
+        code { background: #f8fafc; padding: 0.2rem 0.4rem; border-radius: 4px; }
         pre code { background: none; padding: 0; border: none; }
-        table {
-            border-collapse: collapse;
-            width: 100%;
-            margin: 1rem 0;
-            border: 1px solid #e2e8f0;
-            border-radius: 8px;
-            overflow: hidden;
-        }
-        th, td {
-            border: 1px solid #e2e8f0;
-            padding: 0.75rem;
-            text-align: left;
-        }
-        th {
-            background: #f8fafc;
-            font-weight: 600;
-            color: #0f172a;
-        }
-        tr:nth-child(even) { background: #f8fafc; }
-        blockquote {
-            border-left: 4px solid #2563eb;
-            padding-left: 1rem;
-            margin: 1rem 0;
-            color: #64748b;
-        }
-        hr {
-            border: none;
-            border-top: 1px solid #e2e8f0;
-            margin: 2rem 0;
-        }
-        .back-link {
-            display: inline-block;
-            margin-bottom: 2rem;
-            background: #2563eb;
-            color: white;
-            padding: 0.75rem 1.5rem;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 600;
-        }
+        table { border-collapse: collapse; width: 100%; margin: 1rem 0; }
+        th, td { border: 1px solid #e2e8f0; padding: 0.75rem; text-align: left; }
+        th { background: #f8fafc; font-weight: 600; }
+        .back-link { display: inline-block; margin-bottom: 2rem; background: #2563eb; color: white; padding: 0.75rem 1.5rem; border-radius: 8px; text-decoration: none; font-weight: 600; }
         .back-link:hover { background: #1d4ed8; text-decoration: none; }
+        .recommendation { background: #d1fae5; border: 2px solid #059669; padding: 1.5rem; border-radius: 8px; margin: 2rem 0; }
     </style>
 </head>
 <body>
     <div class="container">
-        <a href="../index.html" class="back-link">← Back to Documentation</a>
-        <nav style="margin-bottom: 2rem;">
-            <a href="../index.html">🏠 Home</a>
+        <a href="../../index.html" class="back-link">← Back to Documentation</a>
+        <nav>
+            <a href="../../index.html">🏠 Home</a>
             <a href="https://github.com/FreddyAITest/ai-insights-docs">GitHub</a>
-            <a href="https://illustrious-parfait-00e2cf.netlify.app/">Live Site</a>
         </nav>
+
+        <header>
+            <h1>🔍 Free Search APIs Comparison 2026</h1>
+            <p>Best free web search APIs for research automation</p>
+        </header>
+
+        <div class="recommendation">
+            <h2>🥇 Best Overall: Tavily API</h2>
+            <p><strong>Free Tier:</strong> 1,000 searches/month (~33/day)<br>
+            <strong>Why:</strong> Perfect for AI research, includes citations, no credit card required</p>
+        </div>
+
+        <h2>📊 Comparison Table</h2>
+        <table>
+            <tr><th>API</th><th>Free Searches</th><th>Daily Avg</th><th>Best For</th></tr>
+            <tr><td><strong>Tavily</strong></td><td>1,000/month</td><td>~33</td><td>AI research, citations</td></tr>
+            <tr><td><strong>Serper</strong></td><td>2,500/month</td><td>~83</td><td>Google results</td></tr>
+            <tr><td><strong>SerpAPI</strong></td><td>250/month</td><td>~8</td><td>Multi-engine</td></tr>
+            <tr><td><strong>Brave</strong></td><td>~1,000/month</td><td>~33</td><td>Privacy-focused</td></tr>
+        </table>
+
+        <h2>🚀 Getting Started with Tavily</h2>
+        
+        <h3>1. Sign Up</h3>
+        <p>Go to <a href="https://app.tavily.com/sign-up" target="_blank">app.tavily.com/sign-up</a> (2 minutes, no credit card)</p>
+
+        <h3>2. Get API Key</h3>
+        <p>Dashboard → API Keys → Copy key (starts with <code>tvly-</code>)</p>
+
+        <h3>3. First Search</h3>
+        <pre><code>const { TavilyClient } = require('tavily');
+const tavily = new TavilyClient('YOUR_API_KEY');
+
+const results = await tavily.search('Latest AI developments 2026', {
+  search_depth: 'advanced',
+  include_answer: true
+});
+
+console.log(results);</code></pre>
+
+        <h2>💡 Pro Tips</h2>
+        <ul>
+            <li>Combine Tavily (research) + Serper (news) for best results</li>
+            <li>Cache responses to avoid re-searching</li>
+            <li>Monitor your monthly quota</li>
+            <li>Export to Word, PDF, Markdown, or JSON</li>
+        </ul>
+
+        <h2>📄 Research → Word Workflow</h2>
+        <p>Use the <code>research-automation.js</code> script to automatically:</p>
+        <ol>
+            <li>Search with Tavily</li>
+            <li>Compile findings</li>
+            <li>Generate Word-compatible HTML</li>
+            <li>Save to archive</li>
+            <li>Upload to GitHub or Notion</li>
+        </ol>
+
+        <p style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #e2e8f0; color: #64748b;">
+            <strong>Ready to start?</strong> Sign up for Tavily and you're good to go! 🚀
+        </p>
     </div>
 </body>
 </html>
