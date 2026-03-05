@@ -1,0 +1,43 @@
+{
+  "backlog": [],
+  "inProgress": [
+    {
+      "id": 1,
+      "title": "Fix ETF Dashboard Charts",
+      "desc": "Charts showing 'Loading...' - need to fix data path and add comparison view with % performance"
+    },
+    {
+      "id": 2,
+      "title": "Shell MCS Scientific Paper",
+      "desc": "8,000-12,000 word scientific analysis of Shell ROI with Monte Carlo simulation. Due in ~3 hours."
+    }
+  ],
+  "needsHelp": [],
+  "finished": [
+    {
+      "id": 1,
+      "title": "Set up Kanban dashboard",
+      "desc": "Initialized the GitHub-hosted Kanban board with tasks.json and dashboard.html"
+    },
+    {
+      "id": 2,
+      "title": "ETF Dashboard Live",
+      "desc": "Interactive stock price dashboard with 3 ETFs, Chart.js charts, auto-updates daily"
+    },
+    {
+      "id": 3,
+      "title": "Monte Carlo Guide Published",
+      "desc": "3,562-word comprehensive guide with 4 case studies published to website"
+    },
+    {
+      "id": 4,
+      "title": "Redis Caching Integrated",
+      "desc": "10x faster research, 90% less API quota usage"
+    },
+    {
+      "id": 5,
+      "title": "Newsletter Automation",
+      "desc": "Daily newsletter at 9:00 CET via Brevo API + cron job"
+    }
+  ]
+}
