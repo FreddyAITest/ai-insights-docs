@@ -1,6 +1,6 @@
-# Benefits of Redis caching
+# undefined
 
-**Research Date:** Donnerstag, 5. März 2026
+**Research Date:** Invalid Date
 
 ## 📋 Summary
 
@@ -317,5 +317,5 @@ With Redis, businesses are empowered to choose the data types that fit their spe
 ## 📊 Metadata
 
 - **Total Sources:** 10
-- **Research Date:** 5.3.2026, 18:05:14
+- **Research Date:** Invalid Date
 - **API:** Tavily Search
