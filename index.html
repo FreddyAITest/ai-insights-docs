@@ -9,8 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
-    <!-- Brevo Form Styles -->
-    <link rel="stylesheet" href="https://sibforms.com/forms/end-form/build/sib-styles.css">
+
     <style>
         * {
             margin: 0;
@@ -361,7 +360,7 @@
         
         <!-- Brevo Newsletter Form -->
         <div style="background: rgba(255,255,255,0.95); padding: 2rem; border-radius: 12px; box-shadow: 0 10px 40px rgba(0,0,0,0.1); max-width: 540px; margin: 0 auto;">
-            <form id="newsletter-form" method="POST" action="https://1b30e838.sibforms.com/serve/MUIFACzYNK980ANbLgaBgdz9rb7kM0cbd_FlarizsA9Pe2z_xTzPgHv4LdGrGNNfW1-AdkoS6-iqbE7XtrErU2Y48ovQ-3qGNUnRANCLgAdz6kHda7XFg4ht5U5ggUrLlbppC5g97xvkljU53tOh9eERXIHzJNfg2Cr1PxlcPaTaevGhIBuOuYjUvyQkFWEzloLS1UdhoBYmNf-dvQ==" target="_blank" onsubmit="return handleNewsletterSubmit(this)">
+            <form id="newsletter-form" onsubmit="return handleNewsletterSubmit(event)">
                 <div style="text-align: center; margin-bottom: 1.5rem;">
                     <h3 style="font-size: 20px; font-weight: 700; font-family: 'Inter', sans-serif; color: #0f172a; margin: 0 0 0.5rem 0;">📬 Bleib auf dem Laufenden!</h3>
                     <p style="font-size: 14px; color: #64748b; margin: 0;">Erhalte die neuesten KI-Projekte & Insights direkt in dein Postfach.</p>
@@ -521,7 +520,11 @@
     
     <!-- Newsletter Form Handler -->
     <script>
-        function handleNewsletterSubmit(form) {
+        const BREVO_URL = 'https://1b30e838.sibforms.com/serve/MUIFACzYNK980ANbLgaBgdz9rb7kM0cbd_FlarizsA9Pe2z_xTzPgHv4LdGrGNNfW1-AdkoS6-iqbE7XtrErU2Y48ovQ-3qGNUnRANCLgAdz6kHda7XFg4ht5U5ggUrLlbppC5g97xvkljU53tOh9eERXIHzJNfg2Cr1PxlcPaTaevGhIBuOuYjUvyQkFWEzloLS1UdhoBYmNf-dvQ==';
+        
+        function handleNewsletterSubmit(event) {
+            event.preventDefault();
+            
             const email = document.getElementById('email').value;
             const consent = document.getElementById('consent').checked;
             const submitBtn = document.getElementById('submit-btn');
@@ -539,23 +542,50 @@
             submitBtn.disabled = true;
             submitBtn.innerHTML = '⏳ Wird gesendet...';
             submitBtn.style.opacity = '0.7';
+            formMessage.style.display = 'none';
             
-            // Let Brevo handle the submission normally (opens in new tab)
-            setTimeout(() => {
+            // Build form data
+            const formData = new FormData();
+            formData.append('EMAIL', email);
+            formData.append('consent', 'on');
+            formData.append('locale', 'de');
+            
+            // Submit to Brevo via fetch
+            fetch(BREVO_URL, {
+                method: 'POST',
+                mode: 'no-cors',
+                body: formData
+            })
+            .then(() => {
+                // Success
                 formMessage.style.display = 'block';
                 formMessage.style.background = '#d1fae5';
                 formMessage.style.color = '#065f46';
-                formMessage.innerHTML = '✅ <strong>Fast geschafft!</strong> Bitte öffne das neue Fenster und bestätige deine E-Mail-Adresse (Double Opt-In).';
+                formMessage.innerHTML = '✅ <strong>Erfolgreich!</strong> Bitte prüfe dein E-Mail-Postfach und bestätige die Anmeldung (Double Opt-In).';
+                
+                submitBtn.innerHTML = '✅ Angemeldet';
+                document.getElementById('newsletter-form').reset();
                 
                 setTimeout(() => {
                     submitBtn.disabled = false;
                     submitBtn.innerHTML = '🚀 KOSTENLOS ANMELDEN';
                     submitBtn.style.opacity = '1';
-                    form.reset();
-                }, 3000);
-            }, 500);
+                    formMessage.style.display = 'none';
+                }, 5000);
+            })
+            .catch((error) => {
+                // Error
+                formMessage.style.display = 'block';
+                formMessage.style.background = '#fee2e2';
+                formMessage.style.color = '#991b1b';
+                formMessage.innerHTML = '❌ Ein Fehler ist aufgetreten. Bitte versuche es erneut.';
+                
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = '🚀 KOSTENLOS ANMELDEN';
+                submitBtn.style.opacity = '1';
+            });
             
-            return true; // Allow form to submit to Brevo
+            return false;
         }
     </script>
     
