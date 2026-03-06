@@ -5,14 +5,19 @@
       "id": 1,
       "title": "Fix ETF Dashboard Charts",
       "desc": "Charts showing 'Loading...' - need to fix data path and add comparison view with % performance"
+    },
+    {
+      "id": 2,
+      "title": "Shell MCS Paper v4 - EXPAND TO 8K-12K WORDS",
+      "desc": "Current paper only 3,522 words (spec was 8,000-12,000). Expanding: more literature review, deeper methodology, extended results, discussion, appendices. Checkpoints every 15 min."
     }
   ],
   "needsHelp": [],
   "finished": [
     {
-      "id": -1,
-      "title": "Shell MCS Scientific Paper COMPLETE",
-      "desc": "3,522-word scientific paper with 100K iteration MCS. Mean ROCE 11.9%, 75% prob >10%. Python code + all data. Uploaded to GitHub & website."
+      "id": 0,
+      "title": "Task Persistence System Installed",
+      "desc": "Checkpoint system + boot-time cron job to prevent subagent data loss on VPS restart"
     },
     {
       "id": 0,
