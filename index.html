@@ -1,14 +1,605 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Landing Page</title>
-    <script type="module" crossorigin src="/assets/index-wNSrW-yy.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-C46tl2u0.css">
-  </head>
-  <body>
-    <div id="root"></div>
-  </body>
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Innovation Newsletter | Neueste KI-Projekte & Insights</title>
+    <meta name="description" content="Erhalten Sie die neuesten Einblicke in KI-Projekte und Software-Innovationen. Melden Sie sich für unseren Newsletter an.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary: #0f172a;
+            --text: #334155;
+            --text-light: #64748b;
+            --bg: #ffffff;
+            --bg-light: #f8fafc;
+            --border: #e2e8f0;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Fixed Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            z-index: 1000;
+            padding: 1rem 2rem;
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--secondary);
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--primary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 8rem 2rem 4rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            opacity: 0.95;
+        }
+
+        /* Newsletter Form */
+        .newsletter-form {
+            max-width: 500px;
+            margin: 0 auto;
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .newsletter-form input[type="email"] {
+            flex: 1;
+            min-width: 250px;
+            padding: 1rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: inherit;
+        }
+
+        .newsletter-form button {
+            padding: 1rem 2rem;
+            background: var(--secondary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+            font-family: inherit;
+        }
+
+        .newsletter-form button:hover {
+            background: #1e293b;
+        }
+
+        .consent-text {
+            font-size: 0.875rem;
+            margin-top: 1rem;
+            opacity: 0.9;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .consent-text a {
+            color: white;
+            text-decoration: underline;
+        }
+
+        /* Projects Section */
+        .projects {
+            padding: 5rem 2rem;
+            background: var(--bg-light);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+
+        .section-title p {
+            color: var(--text-light);
+            font-size: 1.125rem;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .project-image {
+            height: 200px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+        }
+
+        .project-content {
+            padding: 1.5rem;
+        }
+
+        .project-content h3 {
+            font-size: 1.5rem;
+            color: var(--secondary);
+            margin-bottom: 0.75rem;
+        }
+
+        .project-content p {
+            color: var(--text-light);
+            margin-bottom: 1rem;
+        }
+
+        .project-tags {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            background: var(--bg-light);
+            color: var(--text-light);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 5rem 2rem;
+            background: white;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.25rem;
+            color: var(--secondary);
+            margin-bottom: 0.75rem;
+        }
+
+        .feature-card p {
+            color: var(--text-light);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--secondary);
+            color: white;
+            padding: 3rem 2rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-section h4 {
+            font-size: 1.125rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section a {
+            color: #94a3b8;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .footer-section a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 2rem auto 0;
+            padding-top: 2rem;
+            border-top: 1px solid #334155;
+            text-align: center;
+            color: #94a3b8;
+            font-size: 0.875rem;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Fixed Header -->
+    <header>
+        <nav>
+            <a href="/" class="logo">AI<span>Insights</span></a>
+            <ul class="nav-links">
+                <li><a href="#projekte">Projekte</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#newsletter">Newsletter</a></li>
+                <li><a href="impressum.html">Impressum</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Neueste KI-Projekte &<br>Innovationen entdecken</h1>
+        <p>Erhalten Sie exklusive Einblicke in unsere neuesten Software-Projekte und KI-Innovationen direkt in Ihr Postfach.</p>
+        
+        <!-- Brevo Newsletter Form -->
+        <div style="background: rgba(255,255,255,0.95); padding: 2rem; border-radius: 12px; box-shadow: 0 10px 40px rgba(0,0,0,0.1); max-width: 540px; margin: 0 auto;">
+            <form id="newsletter-form" onsubmit="return handleNewsletterSubmit(event)">
+                <div style="text-align: center; margin-bottom: 1.5rem;">
+                    <h3 style="font-size: 20px; font-weight: 700; font-family: 'Inter', sans-serif; color: #0f172a; margin: 0 0 0.5rem 0;">📬 Bleib auf dem Laufenden!</h3>
+                    <p style="font-size: 14px; color: #64748b; margin: 0;">Erhalte die neuesten KI-Projekte & Insights direkt in dein Postfach.</p>
+                </div>
+                
+                <div style="margin-bottom: 1rem;">
+                    <input type="email" id="email" name="EMAIL" autocomplete="email" placeholder="deine@email.de" required style="width: 100%; padding: 14px 18px; border: 2px solid #e2e8f0; border-radius: 8px; font-size: 16px; font-family: 'Inter', sans-serif; color: #334155; background: #ffffff; box-sizing: border-box; transition: border-color 0.2s;" onfocus="this.style.borderColor='#2563eb'" onblur="this.style.borderColor='#e2e8f0'" />
+                </div>
+                
+                <!-- DSGVO Consent Checkbox -->
+                <div style="margin-bottom: 1.5rem; text-align: left;">
+                    <label style="display: flex; align-items: flex-start; gap: 12px; font-size: 13px; color: #64748b; cursor: pointer; line-height: 1.5;">
+                        <input type="checkbox" id="consent" name="consent" required style="margin-top: 2px; flex-shrink: 0; width: 18px; height: 18px; accent-color: #2563eb;" />
+                        <span>
+                            Ich habe die <a href="datenschutz.html" style="color: #2563eb; text-decoration: underline;" target="_blank">Datenschutzerklärung</a> gelesen und stimme zu, dass meine E-Mail-Adresse für den Newsletter-Versand gespeichert wird. Ich kann meine Einwilligung jederzeit widerrufen.
+                        </span>
+                    </label>
+                </div>
+                
+                <div style="margin-bottom: 1rem;">
+                    <button type="submit" id="submit-btn" style="width: 100%; padding: 16px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: #FFFFFF; border: none; border-radius: 8px; font-size: 16px; font-weight: 700; cursor: pointer; font-family: 'Inter', sans-serif; box-shadow: 0 4px 14px rgba(102, 126, 234, 0.4); transition: all 0.2s;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(102, 126, 234, 0.5)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 14px rgba(102, 126, 234, 0.4)'">
+                        🚀 KOSTENLOS ANMELDEN
+                    </button>
+                </div>
+                
+                <input type="hidden" name="locale" value="de">
+            </form>
+            
+            <div id="form-message" style="display: none; padding: 1rem; border-radius: 8px; margin-top: 1rem; text-align: center;"></div>
+        </div>
+        
+        <p class="consent-text" style="margin-top: 1.5rem; font-size: 0.875rem; color: rgba(255,255,255,0.8);">
+            🔒 DSGVO-konform mit Double Opt-In. Abmeldung jederzeit möglich.
+        </p>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="projects" id="projekte">
+        <div class="container">
+            <div class="section-title">
+                <h2>Unsere neuesten Projekte</h2>
+                <p>Entdecken Sie unsere aktuellen KI- und Software-Innovationen</p>
+            </div>
+            
+            <div class="projects-grid">
+                <article class="project-card">
+                    <div class="project-image">🤖</div>
+                    <div class="project-content">
+                        <h3>AI Automation Suite</h3>
+                        <p>Intelligente Automatisierungslösung für Unternehmensprozesse mit maschinellem Lernen und natürlicher Sprachverarbeitung.</p>
+                        <div class="project-tags">
+                            <span class="tag">KI</span>
+                            <span class="tag">Automation</span>
+                            <span class="tag">Enterprise</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="project-card">
+                    <div class="project-image">📊</div>
+                    <div class="project-content">
+                        <h3>Predictive Analytics Platform</h3>
+                        <p>Datengetriebene Vorhersagemodelle für präzise Geschäftsprognosen und strategische Entscheidungsfindung.</p>
+                        <div class="project-tags">
+                            <span class="tag">Analytics</span>
+                            <span class="tag">Machine Learning</span>
+                            <span class="tag">SaaS</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="project-card">
+                    <div class="project-image">💬</div>
+                    <div class="project-content">
+                        <h3>Conversational AI Assistant</h3>
+                        <p>Natürliche Sprachassistenten für Kundenservice und interne Kommunikation mit kontextuellem Verständnis.</p>
+                        <div class="project-tags">
+                            <span class="tag">NLP</span>
+                            <span class="tag">Chatbot</span>
+                            <span class="tag">Customer Service</span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-title">
+                <h2>Warum unseren Newsletter abonnieren?</h2>
+                <p>Exklusive Inhalte direkt von unserem Entwicklungsteam</p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🚀</div>
+                    <h3>Früher Zugang</h3>
+                    <p>Erfahren Sie als Erster von neuen Projekten und Beta-Versionen unserer Softwarelösungen.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">📚</div>
+                    <h3>Experten-Insights</h3>
+                    <p>Tiefe technische Einblicke und Best Practices von unserem KI-Entwicklungsteam.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3>Praktische Anwendungen</h3>
+                    <p>Reale Use-Cases und Implementierungsbeispiele für Ihre eigenen Projekte.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>AI Insights</h4>
+                <p style="color: #94a3b8; margin-top: 0.5rem;">Ihr Partner für KI-Innovationen und Softwareentwicklung.</p>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Navigation</h4>
+                <ul>
+                    <li><a href="#projekte">Projekte</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#newsletter">Newsletter</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Rechtliches</h4>
+                <ul>
+                    <li><a href="impressum.html">Impressum</a></li>
+                    <li><a href="datenschutz.html">Datenschutz</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Kontakt</h4>
+                <ul>
+                    <li><a href="mailto:info@example.de">info@example.de</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2026 AI Insights. Alle Rechte vorbehalten.</p>
+        </div>
+    </footer>
+
+
+    
+    <!-- Newsletter Form Handler -->
+    <script>
+        const BREVO_URL = 'https://1b30e838.sibforms.com/serve/MUIFACzYNK980ANbLgaBgdz9rb7kM0cbd_FlarizsA9Pe2z_xTzPgHv4LdGrGNNfW1-AdkoS6-iqbE7XtrErU2Y48ovQ-3qGNUnRANCLgAdz6kHda7XFg4ht5U5ggUrLlbppC5g97xvkljU53tOh9eERXIHzJNfg2Cr1PxlcPaTaevGhIBuOuYjUvyQkFWEzloLS1UdhoBYmNf-dvQ==';
+        
+        function handleNewsletterSubmit(event) {
+            event.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const consent = document.getElementById('consent').checked;
+            const submitBtn = document.getElementById('submit-btn');
+            const formMessage = document.getElementById('form-message');
+            
+            if (!email || !consent) {
+                formMessage.style.display = 'block';
+                formMessage.style.background = '#fee2e2';
+                formMessage.style.color = '#991b1b';
+                formMessage.innerHTML = '❌ Bitte gib deine E-Mail-Adresse ein und akzeptiere die Datenschutzerklärung.';
+                return false;
+            }
+            
+            // Show loading state
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '⏳ Wird gesendet...';
+            submitBtn.style.opacity = '0.7';
+            formMessage.style.display = 'none';
+            
+            // Build form data
+            const formData = new FormData();
+            formData.append('EMAIL', email);
+            formData.append('consent', 'on');
+            formData.append('locale', 'de');
+            
+            // Submit to Brevo via fetch
+            fetch(BREVO_URL, {
+                method: 'POST',
+                mode: 'no-cors',
+                body: formData
+            })
+            .then(() => {
+                // Success
+                formMessage.style.display = 'block';
+                formMessage.style.background = '#d1fae5';
+                formMessage.style.color = '#065f46';
+                formMessage.innerHTML = '✅ <strong>Erfolgreich!</strong> Bitte prüfe dein E-Mail-Postfach und bestätige die Anmeldung (Double Opt-In).';
+                
+                submitBtn.innerHTML = '✅ Angemeldet';
+                document.getElementById('newsletter-form').reset();
+                
+                setTimeout(() => {
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = '🚀 KOSTENLOS ANMELDEN';
+                    submitBtn.style.opacity = '1';
+                    formMessage.style.display = 'none';
+                }, 5000);
+            })
+            .catch((error) => {
+                // Error
+                formMessage.style.display = 'block';
+                formMessage.style.background = '#fee2e2';
+                formMessage.style.color = '#991b1b';
+                formMessage.innerHTML = '❌ Ein Fehler ist aufgetreten. Bitte versuche es erneut.';
+                
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = '🚀 KOSTENLOS ANMELDEN';
+                submitBtn.style.opacity = '1';
+            });
+            
+            return false;
+        }
+    </script>
+    
+    <!-- Smooth scroll for anchor links -->
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+</body>
 </html>
