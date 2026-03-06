@@ -8,13 +8,18 @@
     },
     {
       "id": 2,
-      "title": "Shell MCS Scientific Paper (RESTARTED v2)",
-      "desc": "8,000-12,000 word scientific analysis of Shell ROI. Subagent restarted with checkpoint persistence enabled. Saves progress every 15 min."
+      "title": "Shell MCS Scientific Paper (v3 - RESUMED)",
+      "desc": "8,000-12,000 word scientific analysis. Subagent v2 crashed at 25%. v3 resumed from 07:13 checkpoint. Telegram updates every 30 min. Expected: 11:00-12:00 UTC."
     },
     {
       "id": 3,
       "title": "Task Persistence System Setup",
       "desc": "Installed checkpoint system for long-running subagents. Cron job runs on boot to detect incomplete tasks. Ready to prevent future data loss."
+    },
+    {
+      "id": 4,
+      "title": "Telegram Progress Updates",
+      "desc": "30-min progress updates via Telegram for Shell MCS paper. Cron job active."
     }
   ],
   "needsHelp": [],
