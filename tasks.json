@@ -8,8 +8,8 @@
     },
     {
       "id": 2,
-      "title": "Shell MCS Scientific Paper (RESTART NEEDED)",
-      "desc": "8,000-12,000 word scientific analysis of Shell ROI. Subagent died on VPS reboot. Task persistence system installed - ready to resume with checkpoints."
+      "title": "Shell MCS Scientific Paper (RESTARTED v2)",
+      "desc": "8,000-12,000 word scientific analysis of Shell ROI. Subagent restarted with checkpoint persistence enabled. Saves progress every 15 min."
     },
     {
       "id": 3,
