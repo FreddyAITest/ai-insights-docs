@@ -8,12 +8,22 @@
     },
     {
       "id": 2,
-      "title": "Shell MCS Scientific Paper",
-      "desc": "8,000-12,000 word scientific analysis of Shell ROI with Monte Carlo simulation. Due in ~3 hours."
+      "title": "Shell MCS Scientific Paper (RESTART NEEDED)",
+      "desc": "8,000-12,000 word scientific analysis of Shell ROI. Subagent died on VPS reboot. Task persistence system installed - ready to resume with checkpoints."
+    },
+    {
+      "id": 3,
+      "title": "Task Persistence System Setup",
+      "desc": "Installed checkpoint system for long-running subagents. Cron job runs on boot to detect incomplete tasks. Ready to prevent future data loss."
     }
   ],
   "needsHelp": [],
   "finished": [
+    {
+      "id": 0,
+      "title": "Task Persistence System Installed",
+      "desc": "Checkpoint system + boot-time cron job to prevent subagent data loss on VPS restart"
+    },
     {
       "id": 1,
       "title": "Set up Kanban dashboard",
