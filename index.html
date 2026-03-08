@@ -67,6 +67,36 @@
             color: var(--primary);
         }
 
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+            background: none;
+            border: none;
+            padding: 5px;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: var(--secondary);
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -6px);
+        }
+
         .nav-links {
             display: flex;
             gap: 2rem;
@@ -82,6 +112,88 @@
 
         .nav-links a:hover {
             color: var(--primary);
+        }
+
+        /* Sidebar Navigation */
+        .sidebar-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1001;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .sidebar-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .sidebar {
+            position: fixed;
+            top: 0;
+            right: -300px;
+            width: 300px;
+            height: 100vh;
+            background: white;
+            z-index: 1002;
+            transition: right 0.3s ease;
+            padding: 2rem;
+            overflow-y: auto;
+            box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .sidebar.active {
+            right: 0;
+        }
+
+        .sidebar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .sidebar-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-light);
+        }
+
+        .sidebar-nav {
+            list-style: none;
+        }
+
+        .sidebar-nav li {
+            margin-bottom: 0.5rem;
+        }
+
+        .sidebar-nav a {
+            display: block;
+            padding: 0.75rem 1rem;
+            color: var(--text);
+            text-decoration: none;
+            border-radius: 6px;
+            transition: background 0.2s, color 0.2s;
+            font-weight: 500;
+        }
+
+        .sidebar-nav a:hover {
+            background: var(--bg-light);
+            color: var(--primary);
+        }
+
+        .sidebar-nav a.active {
+            background: var(--primary);
+            color: white;
         }
 
         /* Hero Section */
@@ -104,6 +216,68 @@
             max-width: 600px;
             margin: 0 auto 2rem;
             opacity: 0.95;
+        }
+
+        /* Featured Blog Post Section */
+        .featured-blog {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 16px;
+            padding: 2rem;
+            margin: 2rem auto 0;
+            max-width: 800px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .featured-blog:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);
+        }
+
+        .featured-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 1rem;
+        }
+
+        .featured-blog h3 {
+            font-size: 1.75rem;
+            color: var(--secondary);
+            margin-bottom: 0.75rem;
+            line-height: 1.3;
+        }
+
+        .featured-blog p {
+            color: var(--text-light);
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .featured-blog-meta {
+            font-size: 0.875rem;
+            color: var(--text-light);
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .read-more-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--primary);
+            font-weight: 600;
+            margin-top: 1rem;
         }
 
         /* Newsletter Form */
@@ -323,18 +497,208 @@
             font-size: 0.875rem;
         }
 
-        /* Mobile Responsive */
+        /* Mobile Responsive - Enhanced */
         @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2rem;
+            /* Base mobile typography */
+            body {
+                font-size: 16px;
+            }
+
+            header {
+                padding: 0.75rem 1rem;
+            }
+
+            .hamburger {
+                display: flex;
+                z-index: 1003;
+                padding: 10px;
+                min-width: 44px;
+                min-height: 44px;
             }
 
             .nav-links {
                 display: none;
             }
 
+            .logo {
+                font-size: 1.25rem;
+            }
+
+            .hero {
+                padding: 6rem 1rem 3rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+                margin-bottom: 1rem;
+                line-height: 1.3;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .featured-blog {
+                padding: 1.5rem;
+                margin: 1.5rem auto 0;
+                border-radius: 12px;
+            }
+
+            .featured-blog h3 {
+                font-size: 1.35rem;
+                line-height: 1.3;
+            }
+
+            .featured-blog p {
+                font-size: 1rem;
+                line-height: 1.6;
+            }
+
+            .featured-blog-meta {
+                flex-direction: column;
+                gap: 0.5rem;
+                align-items: flex-start;
+                font-size: 0.9rem;
+            }
+
+            .read-more-btn {
+                font-size: 1rem;
+                padding: 8px 0;
+                min-height: 44px;
+                display: inline-flex;
+                align-items: center;
+            }
+
+            .newsletter-form input[type="email"] {
+                min-height: 48px;
+                font-size: 16px;
+            }
+
+            .newsletter-form button {
+                min-height: 48px;
+                font-size: 16px;
+                padding: 14px 20px;
+            }
+
+            .consent-text {
+                font-size: 0.9rem;
+                line-height: 1.5;
+            }
+
+            .projects {
+                padding: 3rem 1rem;
+            }
+
+            .section-title h2 {
+                font-size: 1.875rem;
+            }
+
+            .section-title p {
+                font-size: 1rem;
+            }
+
             .projects-grid {
                 grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .project-card {
+                min-width: 100%;
+            }
+
+            .project-image {
+                height: 180px;
+            }
+
+            .project-content {
+                padding: 1.25rem;
+            }
+
+            .project-content h3 {
+                font-size: 1.35rem;
+            }
+
+            .project-content p {
+                font-size: 1rem;
+            }
+
+            .tag {
+                min-height: 32px;
+                padding: 0.375rem 0.875rem;
+                font-size: 0.875rem;
+            }
+
+            .features {
+                padding: 3rem 1rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .feature-card {
+                padding: 1.5rem;
+            }
+
+            .feature-icon {
+                font-size: 2.5rem;
+            }
+
+            .feature-card h3 {
+                font-size: 1.25rem;
+            }
+
+            .feature-card p {
+                font-size: 1rem;
+            }
+
+            footer {
+                padding: 2rem 1rem;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .footer-section h4 {
+                font-size: 1.125rem;
+            }
+
+            .footer-section a {
+                font-size: 0.95rem;
+                min-height: 44px;
+                display: inline-flex;
+                align-items: center;
+            }
+        }
+
+        /* Small mobile devices */
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 1.5rem;
+            }
+
+            .hero p {
+                font-size: 0.95rem;
+            }
+
+            .featured-blog h3 {
+                font-size: 1.125rem;
+            }
+
+            .section-title h2 {
+                font-size: 1.5rem;
+            }
+
+            .project-image {
+                height: 160px;
+            }
+
+            .project-content h3 {
+                font-size: 1.25rem;
             }
         }
     </style>
@@ -344,6 +708,11 @@
     <header>
         <nav>
             <a href="/" class="logo">AI<span>Insights</span></a>
+            <button class="hamburger" aria-label="Menü öffnen" onclick="toggleSidebar()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
             <ul class="nav-links">
                 <li><a href="#projekte">Projekte</a></li>
                 <li><a href="#features">Features</a></li>
@@ -353,13 +722,44 @@
         </nav>
     </header>
 
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <a href="/" class="logo">AI<span>Insights</span></a>
+            <button class="sidebar-close" aria-label="Menü schließen" onclick="toggleSidebar()">&times;</button>
+        </div>
+        <ul class="sidebar-nav">
+            <li><a href="#projekte">Projekte</a></li>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#newsletter">Newsletter</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="impressum.html">Impressum</a></li>
+            <li><a href="datenschutz.html">Datenschutz</a></li>
+        </ul>
+    </aside>
+
     <!-- Hero Section -->
     <section class="hero">
         <h1>Neueste KI-Projekte &<br>Innovationen entdecken</h1>
         <p>Erhalten Sie exklusive Einblicke in unsere neuesten Software-Projekte und KI-Innovationen direkt in Ihr Postfach.</p>
         
+        <!-- Featured Blog Post -->
+        <a href="blog/post-4.html" class="featured-blog">
+            <span class="featured-badge">🔥 Neuester Artikel</span>
+            <h3>The Digital Paper Empire: AI-Powered Mass Production & Lead Generation</h3>
+            <p>Complete guide to generating 2,000+ AI designs, automating publication across Etsy and marketplaces, and building automated lead generation systems.</p>
+            <div class="featured-blog-meta">
+                <span>📅 8. März 2026</span>
+                <span>⏱️ 25 Min. Lesezeit</span>
+            </div>
+            <span class="read-more-btn">Jetzt lesen →</span>
+        </a>
+        
         <!-- Brevo Newsletter Form -->
-        <div style="background: rgba(255,255,255,0.95); padding: 2rem; border-radius: 12px; box-shadow: 0 10px 40px rgba(0,0,0,0.1); max-width: 540px; margin: 0 auto;">
+        <div style="background: rgba(255,255,255,0.95); padding: 2rem; border-radius: 12px; box-shadow: 0 10px 40px rgba(0,0,0,0.1); max-width: 540px; margin: 2rem auto 0;">
             <form id="newsletter-form" onsubmit="return handleNewsletterSubmit(event)">
                 <div style="text-align: center; margin-bottom: 1.5rem;">
                     <h3 style="font-size: 20px; font-weight: 700; font-family: 'Inter', sans-serif; color: #0f172a; margin: 0 0 0.5rem 0;">📬 Bleib auf dem Laufenden!</h3>
@@ -587,10 +987,28 @@
             
             return false;
         }
-    </script>
-    
-    <!-- Smooth scroll for anchor links -->
-    <script>
+
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('sidebarOverlay');
+            const hamburger = document.querySelector('.hamburger');
+            sidebar.classList.toggle('active');
+            overlay.classList.toggle('active');
+            hamburger.classList.toggle('active');
+            document.body.style.overflow = sidebar.classList.contains('active') ? 'hidden' : '';
+        }
+
+        // Close sidebar on escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                const sidebar = document.getElementById('sidebar');
+                if (sidebar.classList.contains('active')) {
+                    toggleSidebar();
+                }
+            }
+        });
+
+        // Smooth scroll for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 e.preventDefault();
