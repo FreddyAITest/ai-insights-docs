@@ -8,6 +8,13 @@ Welcome to the complete documentation for AI Insights automation tools!
 
 ## 📖 Available Guides
 
+### 📝 Blog Posts
+
+- **[Die Zukunft der Generativen KI](blog/post-1.html)** - Was kommt nach ChatGPT? (German)
+- **[Machine Learning in der Praxis](blog/post-2.html)** - Erfolgsbeispiele aus der Industrie (German)
+- **[KI-Sicherheit](blog/post-3.html)** - Herausforderungen und Lösungen für 2026 (German)
+- **[The Digital Paper Empire](blog/post-4.html)** - Building an AI Documentation System (English)
+
 ### 📦 System & Setup
 
 - **[DNF Package Manager Guide](docs/DNF-GUIDE.md)** - Complete guide to installing software on AlmaLinux
