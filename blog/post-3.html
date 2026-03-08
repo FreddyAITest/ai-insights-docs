@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KI-Sicherheit: Herausforderungen und Lösungen | AI Insights Blog</title>
+    <meta name="description" content="Welche Sicherheitsrisiken KI-Systeme mit sich bringen und wie Unternehmen sich schützen können.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="../assets/theme.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary: #0f172a;
+            --text: #334155;
+            --text-light: #64748b;
+            --bg: #ffffff;
+            --bg-light: #f8fafc;
+            --border: #e2e8f0;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: var(--text);
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        /* Header with Hamburger */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            z-index: 1000;
+            padding: 1rem 2rem;
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--secondary);
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--primary);
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+            background: none;
+            border: none;
+            padding: 5px;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: var(--secondary);
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a.active {
+            color: var(--primary);
+        }
+
+        /* Sidebar Navigation */
+        .sidebar-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1001;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .sidebar-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: -300px;
+            width: 300px;
+            height: 100vh;
+            background: white;
+            z-index: 1002;
+            transition: left 0.3s ease;
+            padding: 2rem;
+            overflow-y: auto;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .sidebar.active {
+            left: 0;
+        }
+
+        .sidebar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .sidebar-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-light);
+        }
+
+        .sidebar-nav {
+            list-style: none;
+        }
+
+        .sidebar-nav li {
+            margin-bottom: 0.5rem;
+        }
+
+        .sidebar-nav a {
+            display: block;
+            padding: 0.75rem 1rem;
+            color: var(--text);
+            text-decoration: none;
+            border-radius: 6px;
+            transition: background 0.2s, color 0.2s;
+            font-weight: 500;
+        }
+
+        .sidebar-nav a:hover {
+            background: var(--bg-light);
+            color: var(--primary);
+        }
+
+        .sidebar-nav a.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Article Header */
+        .article-header {
+            padding: 10rem 2rem 4rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .article-header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            line-height: 1.3;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .article-meta {
+            font-size: 1rem;
+            opacity: 0.95;
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .article-meta span {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Article Content */
+        .article-content {
+            padding: 4rem 2rem;
+            background: var(--bg-light);
+        }
+
+        .article-wrapper {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 3rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+        }
+
+        .article-wrapper h2 {
+            font-size: 1.75rem;
+            color: var(--secondary);
+            margin: 2rem 0 1rem;
+            line-height: 1.3;
+        }
+
+        .article-wrapper h3 {
+            font-size: 1.5rem;
+            color: var(--secondary);
+            margin: 1.5rem 0 0.75rem;
+        }
+
+        .article-wrapper p {
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .article-wrapper ul, .article-wrapper ol {
+            margin-bottom: 1.5rem;
+            padding-left: 2rem;
+        }
+
+        .article-wrapper li {
+            margin-bottom: 0.5rem;
+        }
+
+        .article-wrapper blockquote {
+            border-left: 4px solid var(--primary);
+            padding-left: 1.5rem;
+            margin: 2rem 0;
+            font-style: italic;
+            color: var(--text-light);
+        }
+
+        .article-image {
+            width: 100%;
+            height: 300px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 8px;
+            margin: 2rem 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 5rem;
+        }
+
+        .article-tags {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .tag {
+            background: var(--bg-light);
+            color: var(--text-light);
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        /* Back to Blog */
+        .back-to-blog {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .back-to-blog a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .back-to-blog a:hover {
+            color: var(--primary-dark);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--secondary);
+            color: white;
+            padding: 3rem 2rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-section h4 {
+            font-size: 1.125rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section a {
+            color: #94a3b8;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .footer-section a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 2rem auto 0;
+            padding-top: 2rem;
+            border-top: 1px solid #334155;
+            text-align: center;
+            color: #94a3b8;
+            font-size: 0.875rem;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .article-header h1 {
+                font-size: 1.75rem;
+            }
+
+            .article-wrapper {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Fixed Header -->
+    <header>
+        <nav>
+            <a href="../index.html" class="logo">AI<span>Insights</span></a>
+            <button class="hamburger" aria-label="Menü öffnen" onclick="toggleSidebar()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <div class="nav-center">
+                <ul class="nav-links">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../blog.html" class="active">Blog</a></li>
+                <li><a href="../index.html#projekte">Projekte</a></li>
+                <li><a href="../about.html">Über uns</a></li>
+                <li><a href="../contact.html">Kontakt</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <a href="../index.html" class="logo">AI<span>Insights</span></a>
+            <button class="sidebar-close" aria-label="Menü schließen" onclick="toggleSidebar()">&times;</button>
+        </div>
+        <ul class="sidebar-nav">
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="../blog.html" class="active">Blog</a></li>
+            <li><a href="../index.html#projekte">Projekte</a></li>
+            <li><a href="../about.html">Über uns</a></li>
+            <li><a href="../contact.html">Kontakt</a></li>
+            <li><a href="../impressum.html">Impressum</a></li>
+            <li><a href="../datenschutz.html">Datenschutz</a></li>
+        </ul>
+    </aside>
+
+    <!-- Article Header -->
+    <section class="article-header">
+        <h1>KI-Sicherheit: Herausforderungen und Lösungen für 2026</h1>
+        <div class="article-meta">
+            <span>📅 26. Februar 2026</span>
+            <span>✍️ Von Dr. Sarah Klein</span>
+            <span>⏱️ 7 Min. Lesezeit</span>
+        </div>
+    </section>
+
+    <!-- Article Content -->
+    <section class="article-content">
+        <div class="article-wrapper">
+            <p>Mit der zunehmenden Verbreitung von KI-Systemen wachsen auch die Sicherheitsrisiken. Von Adversarial Attacks bis hin zu Data Poisoning — Unternehmen müssen sich neuer Bedrohungen bewusst sein und geeignete Schutzmaßnahmen ergreifen.</p>
+
+            <div class="article-image">🔒</div>
+
+            <h2>Häufige KI-Sicherheitsbedrohungen</h2>
+            
+            <h3>1. Adversarial Attacks</h3>
+            <p>Gezielt manipulierte Eingabedaten können KI-Modelle zu Fehlklassifikationen verleiten. Ein bekanntes Beispiel: Stoppschilder, die durch minimale Pixeländerungen für KI-Systeme als Tempolimits erscheinen.</p>
+
+            <h3>2. Data Poisoning</h3>
+            <p>Angreifer manipulieren Trainingsdaten, um das Modellverhalten zu beeinflussen. Dies kann zu Backdoors führen, die nur unter spezifischen Bedingungen aktiviert werden.</p>
+
+            <h3>3. Model Inversion</h3>
+            <p>Durch gezielte Abfragen können Angreifer sensible Informationen aus dem Modell extrahieren — etwa Gesichtsbilder aus einem Erkennungssystem.</p>
+
+            <h3>4. Membership Inference</h3>
+            <p>Angreifer können bestimmen, ob bestimmte Daten im Training verwendet wurden. Dies stellt besonders im medizinischen Bereich ein Datenschutzrisiko dar.</p>
+
+            <blockquote>
+                "KI-Sicherheit ist kein Feature, sondern eine Grundvoraussetzung für vertrauenswürdige Systeme." — Prof. Dr. Andreas Wagner, Cybersecurity Institute
+            </blockquote>
+
+            <h2>Schutzmaßnahmen für Unternehmen</h2>
+            
+            <h3>Robustheit testen</h3>
+            <p>Implementieren Sie regelmäßige Adversarial-Testing-Prozesse:</p>
+            <ul>
+                <li>Automatisierte Tests mit generierten Adversarial Examples</li>
+                <li>Red-Teaming-Übungen für KI-Systeme</li>
+                <li>Continous Monitoring auf Anomalien</li>
+            </ul>
+
+            <h3>Data Governance</h3>
+            <p>Stellen Sie die Integrität Ihrer Trainingsdaten sicher:</p>
+            <ul>
+                <li>Data Provenance Tracking: Dokumentieren Sie die Herkunft aller Trainingsdaten</li>
+                <li>Input Validation: Prüfen Sie Eingabedaten auf Manipulationen</li>
+                <li>Differential Privacy: Schützen Sie individuelle Datensätze im Training</li>
+            </ul>
+
+            <h3>Modellhärtung</h3>
+            <p>Technische Maßnahmen zur Erhöhung der Robustheit:</p>
+            <ul>
+                <li><strong>Adversarial Training:</strong> Integrieren Sie Adversarial Examples ins Training</li>
+                <li><strong>Ensemble Methods:</strong> Kombinieren Sie mehrere Modelle für robustere Vorhersagen</li>
+                <li><strong>Input Sanitization:</strong> Bereinigen Sie Eingaben vor der Verarbeitung</li>
+            </ul>
+
+            <h2>Regulatorische Anforderungen</h2>
+            <p>Der EU AI Act und andere Regulierungen setzen zunehmend Sicherheitsstandards für KI-Systeme:</p>
+
+            <ol>
+                <li><strong>Risikoklassifizierung:</strong> Hochrisiko-KI-Systeme unterliegen strengeren Anforderungen</li>
+                <li><strong>Dokumentationspflicht:</strong> Technische Dokumentation und Risikobewertungen sind erforderlich</li>
+                <li><strong>Transparenz:</strong> Nutzer müssen über KI-Einsatz informiert werden</li>
+                <li><strong>Human Oversight:</strong> Menschliche Aufsicht ist für kritische Anwendungen vorgeschrieben</li>
+            </ol>
+
+            <h2>Best Practices für 2026</h2>
+            <p>Basierend auf aktuellen Erkenntnissen empfehlen wir:</p>
+
+            <ul>
+                <li><strong>Security by Design:</strong> Integrieren Sie Sicherheit von Beginn an in Ihre KI-Architektur</li>
+                <li><strong>Regelmäßige Audits:</strong> Führen Sie unabhängige Sicherheitsüberprüfungen durch</li>
+                <li><strong>Incident Response Plan:</strong> Bereiten Sie sich auf Sicherheitsvorfälle vor</li>
+                <li><strong>Employee Training:</strong> Sensibilisieren Sie Mitarbeiter für KI-Sicherheitsrisiken</li>
+                <li><strong>Vendor Assessment:</strong> Prüfen Sie die Sicherheit von KI-Drittanbieterlösungen</li>
+            </ul>
+
+            <h2>Fazit</h2>
+            <p>KI-Sicherheit ist eine sich schnell entwickelnde Disziplin. Unternehmen, die heute in robuste Sicherheitsmaßnahmen investieren, werden langfristig vertrauenswürdigere und erfolgreichere KI-Systeme betreiben.</p>
+
+            <p>Die Kombination aus technischen Schutzmaßnahmen, organisatorischen Prozessen und regulatorischer Compliance bildet die Grundlage für sichere KI-Anwendungen in einer zunehmend digitalisierten Welt.</p>
+
+            <div class="article-tags">
+                <span class="tag">KI-Sicherheit</span>
+                <span class="tag">Cybersecurity</span>
+                <span class="tag">Adversarial ML</span>
+                <span class="tag">Compliance</span>
+            </div>
+        </div>
+
+        <div class="back-to-blog">
+            <a href="../blog.html">← Zurück zum Blog</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>AI Insights</h4>
+                <p style="color: #94a3b8; margin-top: 0.5rem;">Ihr Partner für KI-Innovationen und Softwareentwicklung.</p>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Navigation</h4>
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="../blog.html">Blog</a></li>
+                    <li><a href="../index.html#projekte">Projekte</a></li>
+                    <li><a href="../about.html">Über uns</a></li>
+                    <li><a href="../contact.html">Kontakt</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Rechtliches</h4>
+                <ul>
+                    <li><a href="../impressum.html">Impressum</a></li>
+                    <li><a href="../datenschutz.html">Datenschutz</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Kontakt</h4>
+                <ul>
+                    <li><a href="mailto:info@example.de">info@example.de</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2026 AI Insights. Alle Rechte vorbehalten.</p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('sidebarOverlay');
+            sidebar.classList.toggle('active');
+            overlay.classList.toggle('active');
+            document.body.style.overflow = sidebar.classList.contains('active') ? 'hidden' : '';
+        }
+
+        // Close sidebar on escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                const sidebar = document.getElementById('sidebar');
+                if (sidebar.classList.contains('active')) {
+                    toggleSidebar();
+                }
+            }
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
