@@ -1,0 +1,28 @@
+{
+  "ticker": "IWDA.AS",
+  "name": "MSCI World",
+  "description": "iShares Core MSCI World UCITS ETF",
+  "currency": "EUR",
+  "currency_symbol": "\u20ac",
+  "current_price": 112.02,
+  "price_change": 0,
+  "price_change_percent": 0,
+  "period": "1d",
+  "fetched_at": "2026-03-07T06:00:04.349031",
+  "data_points": 1,
+  "dates": [
+    "2026-03-06"
+  ],
+  "prices": [
+    112.02
+  ],
+  "volumes": [
+    133939
+  ],
+  "highs": [
+    113.57
+  ],
+  "lows": [
+    111.45
+  ]
+}

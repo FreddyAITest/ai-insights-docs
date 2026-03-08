@@ -1,0 +1,28 @@
+{
+  "ticker": "VWRL.L",
+  "name": "FTSE All-World",
+  "description": "Vanguard FTSE All-World UCITS ETF",
+  "currency": "GBP",
+  "currency_symbol": "$",
+  "current_price": 124.15,
+  "price_change": 0,
+  "price_change_percent": 0,
+  "period": "1d",
+  "fetched_at": "2026-03-07T06:00:05.848835",
+  "data_points": 1,
+  "dates": [
+    "2026-03-06"
+  ],
+  "prices": [
+    124.15
+  ],
+  "volumes": [
+    113150
+  ],
+  "highs": [
+    126.33
+  ],
+  "lows": [
+    123.7
+  ]
+}

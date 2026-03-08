@@ -1,0 +1,28 @@
+{
+  "analysis_date": "2026-03-06T12:48:32.187609",
+  "monte_carlo_results": {
+    "iterations": 100000,
+    "mean_roce": 11.877873397623084,
+    "std_roce": 2.800885615865027,
+    "percentile_5": 7.28073267781239,
+    "percentile_25": 9.979069211791645,
+    "percentile_50": 11.87444013486066,
+    "percentile_75": 13.76294352386897,
+    "percentile_95": 16.49383689689241,
+    "min": -0.8080824376824882,
+    "max": 23.440273669033935,
+    "prob_roce_above_10": 74.747,
+    "prob_roce_above_15": 13.319,
+    "prob_roce_below_5": 0.6890000000000001
+  },
+  "risk_metrics": {
+    "var_95": 7.28073267781239,
+    "expected_shortfall": -0.8080824376824882,
+    "sharpe_ratio": 4.240756327335672
+  },
+  "key_findings": {
+    "mean_roce": 11.877873397623084,
+    "prob_roce_above_10": 74.747,
+    "var_95": 7.28073267781239
+  }
+}

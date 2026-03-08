@@ -7,6 +7,10 @@
     <meta name="description" content="Complete guide to generating 2,000+ AI designs, automating publication across Etsy and marketplaces, and building automated lead generation systems.">
     <meta name="author" content="Bob">
     <meta name="keywords" content="AI, digital paper, Etsy, passive income, lead generation, AI art, digital products">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300,400,500,600,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/theme.css">
     <style>
         * {
             margin: 0;
@@ -37,6 +41,35 @@
             border-radius: 5px;
             margin-bottom: 30px;
             transition: background 0.3s;
+        }
+        
+        .theme-toggle-float {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(255,255,255,0.9);
+            border: 2px solid rgba(255,255,255,0.5);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+        
+        .theme-toggle-float:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+        }
+        
+        [data-theme="dark"] .theme-toggle-float {
+            background: rgba(30,41,59,0.9);
+            border-color: rgba(255,255,255,0.2);
         }
         
         .back-link:hover {
@@ -368,6 +401,7 @@
 </head>
 <body>
     <div class="container">
+        <button class="theme-toggle-float" id="theme-toggle" aria-label="Toggle dark mode" onclick="toggleTheme()">🌙</button>
         <a href="../blog.html" class="back-link">← Back to Blog</a>
         
         <article>
@@ -744,5 +778,33 @@ high resolution, commercial use, tileable, 4k, professional design
             </div>
         </article>
     </div>
+    <script>
+        // Theme toggle functionality
+        function toggleTheme() {
+            const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            localStorage.setItem('ai-insights-theme', newTheme);
+            document.documentElement.setAttribute('data-theme', newTheme);
+            
+            const toggleBtn = document.getElementById('theme-toggle');
+            if (toggleBtn) {
+                toggleBtn.innerHTML = newTheme === 'dark' ? '☀️' : '🌙';
+                toggleBtn.setAttribute('aria-label', newTheme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
+            }
+        }
+        
+        // Initialize theme on load
+        (function() {
+            const storedTheme = localStorage.getItem('ai-insights-theme') || 
+                               (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+            document.documentElement.setAttribute('data-theme', storedTheme);
+            
+            const toggleBtn = document.getElementById('theme-toggle');
+            if (toggleBtn) {
+                toggleBtn.innerHTML = storedTheme === 'dark' ? '☀️' : '🌙';
+                toggleBtn.setAttribute('aria-label', storedTheme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
+            }
+        })();
+    </script>
 </body>
 </html>

@@ -7,6 +7,7 @@
     <meta name="description" content="Ein tiefer Einblick in die nächsten Generationen von KI-Modellen und ihre potenziellen Anwendungen.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="../assets/theme.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * {
@@ -415,18 +416,21 @@
     <header>
         <nav>
             <a href="../index.html" class="logo">AI<span>Insights</span></a>
+            <div class="nav-center">
+                <ul class="nav-links">
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="../blog.html" class="active">Blog</a></li>
+                    <li><a href="../index.html#projekte">Projekte</a></li>
+                    <li><a href="../about.html">Über uns</a></li>
+                    <li><a href="../contact.html">Kontakt</a></li>
+                </ul>
+                <button class="theme-toggle" id="theme-toggle" aria-label="Zum dunklen Modus wechseln" onclick="toggleTheme()">🌙</button>
+            </div>
             <button class="hamburger" aria-label="Menü öffnen" onclick="toggleSidebar()">
                 <span></span>
                 <span></span>
                 <span></span>
             </button>
-            <ul class="nav-links">
-                <li><a href="../index.html">Home</a></li>
-                <li><a href="../blog.html" class="active">Blog</a></li>
-                <li><a href="../index.html#projekte">Projekte</a></li>
-                <li><a href="../about.html">Über uns</a></li>
-                <li><a href="../contact.html">Kontakt</a></li>
-            </ul>
         </nav>
     </header>
 
@@ -590,6 +594,19 @@
                 }
             });
         });
+
+        // Initialize theme toggle button text on load
+        document.addEventListener('DOMContentLoaded', function() {
+            const theme = document.documentElement.getAttribute('data-theme') || 'light';
+            const toggleBtn = document.getElementById('theme-toggle');
+            if (toggleBtn) {
+                toggleBtn.innerHTML = theme === 'dark' ? '☀️' : '🌙';
+                toggleBtn.setAttribute('aria-label', theme === 'dark' ? 'Zum hellen Modus wechseln' : 'Zum dunklen Modus wechseln');
+            }
+        });
     </script>
+    
+    <!-- Theme Toggle Script -->
+    <script src="../assets/theme-toggle.js"></script>
 </body>
 </html>

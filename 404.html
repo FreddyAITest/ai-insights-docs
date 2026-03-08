@@ -4,8 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Seite nicht gefunden | AI Insights</title>
-    <meta name="description" content="Die gesuchte Seite wurde leider nicht gefunden.">
-    <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+    <meta name="description" content="Die gesuchte Seite existiert leider nicht.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -16,27 +15,27 @@
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             color: var(--text);
             line-height: 1.6;
+            background: var(--bg);
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: var(--bg);
         }
-        
+
         .error-container {
             text-align: center;
-            padding: 2rem;
+            padding: 4rem 2rem;
             max-width: 600px;
         }
-        
+
         .error-code {
             font-size: 8rem;
-            font-weight: 700;
+            font-weight: 900;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -44,69 +43,58 @@
             line-height: 1;
             margin-bottom: 1rem;
         }
-        
+
         .error-title {
             font-size: 2rem;
-            font-weight: 600;
+            font-weight: 700;
             color: var(--secondary);
             margin-bottom: 1rem;
         }
-        
+
         .error-message {
             font-size: 1.125rem;
             color: var(--text-light);
             margin-bottom: 2rem;
         }
-        
+
         .error-actions {
             display: flex;
             gap: 1rem;
             justify-content: center;
             flex-wrap: wrap;
         }
-        
+
         .btn {
             display: inline-block;
             padding: 0.75rem 1.5rem;
             border-radius: 0.5rem;
+            font-weight: 600;
             text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
+            transition: all 0.2s;
         }
-        
+
         .btn-primary {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
         }
-        
+
         .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
         }
-        
+
         .btn-secondary {
             background: var(--bg-light);
-            color: var(--secondary);
+            color: var(--text);
             border: 1px solid var(--border);
         }
-        
+
         .btn-secondary:hover {
             background: var(--border);
         }
-        
-        @media (max-width: 768px) {
-            .error-code {
-                font-size: 5rem;
-            }
-            
-            .error-title {
-                font-size: 1.5rem;
-            }
-            
-            .error-actions {
-                flex-direction: column;
-                align-items: center;
-            }
+
+        [data-theme="dark"] .btn-secondary:hover {
+            background: var(--border);
         }
     </style>
 </head>
@@ -124,16 +112,7 @@
             <a href="/contact.html" class="btn btn-secondary">Kontakt</a>
         </div>
     </div>
-    
-    <script>
-        // Log 404 for analytics
-        console.log('404 Error: Page not found at', window.location.pathname);
-        
-        // Optional: Send to analytics endpoint
-        // fetch('/api/log-404', {
-        //     method: 'POST',
-        //     body: JSON.stringify({ path: window.location.pathname, referrer: document.referrer })
-        // });
-    </script>
+
+    <script src="/assets/theme-toggle.js"></script>
 </body>
 </html>

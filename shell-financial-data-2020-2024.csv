@@ -1,0 +1,43 @@
+# Shell plc Financial Data 2020-2024
+# Sources: Macrotrends.net, Shell Annual Reports, GlobeNewswire
+# All figures in millions USD except where noted
+# Data compiled: 2026-03-06
+
+metric,2020,2021,2022,2023,2024
+Revenue,183195,272657,386201,323183,289029
+Operating Income (EBIT),-22878,33436,67996,37300,34709
+Net Income (Attributable to Shareholders),-21680,20101,42309,19359,16094
+Free Cash Flow,20009,40337,47245,33763,36707
+Capital Expenditure (CapEx),,,,, 
+Cash Flow from Operations,,,,,
+Total Assets,,,,,
+Total Debt,,,,,
+Shareholders Equity,,,,,
+Oil & Gas Production (boe/day),,,,,2836000
+Realized Oil Price ($/boe),,,,,
+Realized Gas Price ($/boe),,,,,
+Refining Margin ($/barrel),,,,,
+ROCE (%),,,,,11.3
+Segment: Upstream Earnings,,,,,
+Segment: Integrated Gas Earnings,,,,,
+Segment: Downstream Earnings,,,,,
+Segment: Chemicals Earnings,,,,,
+Segment: Renewables Earnings,,,,,
+
+# Notes:
+# - 2020 was impacted by COVID-19 pandemic and oil price collapse
+# - 2022 saw record profits due to energy crisis following Ukraine invasion
+# - 2023-2024 saw normalization of energy prices
+# - Production figure for 2024: 2.836 million boe/d (full year average)
+# - ROCE for 2024: 11.3%
+# - CapEx 2024: $21.1 billion
+# - Free Cash Flow 2024: $39.5 billion (company reported) vs $36.7B (macrotrends)
+
+# Data Verification Status:
+# ✅ Revenue: Verified from Macrotrends + Shell reports
+# ✅ Operating Income: Verified from Macrotrends
+# ✅ Net Income: Verified from Macrotrends + Shell reports
+# ✅ Free Cash Flow: Verified from Macrotrends
+# ⏳ CapEx by segment: Partial data available
+# ⏳ Balance sheet items: Need additional research
+# ⏳ Segment earnings: Need additional research

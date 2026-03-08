@@ -1,8 +1,10 @@
 import { useState } from 'react'
+import StockDashboard from './StockDashboard'
 
 function App() {
   const [email, setEmail] = useState('')
   const [submitted, setSubmitted] = useState(false)
+  const [showStocks, setShowStocks] = useState(false)
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -44,19 +46,22 @@ function App() {
               This is your landing page. Clean, modern, and ready to convert visitors into customers.
             </p>
             <div className="mt-10 flex items-center justify-center gap-x-6">
-              <a
-                href="#features"
+              <button
+                onClick={() => setShowStocks(!showStocks)}
                 className="rounded-lg bg-indigo-600 px-6 py-3 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:ring-offset-2"
               >
-                Get Started
-              </a>
-              <a href="#about" className="text-sm font-semibold text-gray-900 hover:text-gray-600">
+                {showStocks ? 'Hide' : 'View'} Stock Dashboard
+              </button>
+              <a href="#features" className="text-sm font-semibold text-gray-900 hover:text-gray-600">
                 Learn more →
               </a>
             </div>
           </div>
         </div>
       </section>
+
+      {/* Stock Dashboard Section */}
+      {showStocks && <StockDashboard />}
 
       {/* Features Section */}
       <section id="features" className="py-24 bg-white">

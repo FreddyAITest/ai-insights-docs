@@ -1,0 +1,28 @@
+{
+  "ticker": "IDVY.L",
+  "name": "High Dividend",
+  "description": "iShares Euro Dividend UCITS ETF",
+  "currency": "GBp",
+  "currency_symbol": "\u20ac",
+  "current_price": 2038.0,
+  "price_change": 0,
+  "price_change_percent": 0,
+  "period": "1d",
+  "fetched_at": "2026-03-07T06:00:07.317143",
+  "data_points": 1,
+  "dates": [
+    "2026-03-06"
+  ],
+  "prices": [
+    2038.0
+  ],
+  "volumes": [
+    118209
+  ],
+  "highs": [
+    2078.5
+  ],
+  "lows": [
+    2015.5
+  ]
+}

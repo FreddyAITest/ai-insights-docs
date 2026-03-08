@@ -1,0 +1,647 @@
+/**
+ * Theme CSS - Dark Mode Support
+ * Complete color scheme for light and dark modes with smooth transitions
+ */
+
+/* ========================================
+   CSS Custom Properties - Light Mode (Default)
+   ======================================== */
+:root {
+    /* Light Mode Colors */
+    --bg: #ffffff;
+    --bg-light: #f8fafc;
+    --text: #334155;
+    --text-light: #64748b;
+    --primary: #2563eb;
+    --primary-dark: #1d4ed8;
+    --secondary: #0f172a;
+    --border: #e2e8f0;
+    --shadow: rgba(0, 0, 0, 0.07);
+    --shadow-hover: rgba(0, 0, 0, 0.1);
+    --footer-bg: #0f172a;
+    --footer-text: #94a3b8;
+    --footer-border: #334155;
+    --sidebar-bg: #ffffff;
+    --overlay-bg: rgba(0, 0, 0, 0.5);
+    --card-bg: #ffffff;
+    --input-bg: #ffffff;
+    --input-border: #e2e8f0;
+    --success-bg: #d1fae5;
+    --success-text: #065f46;
+    --error-bg: #fee2e2;
+    --error-text: #991b1b;
+}
+
+/* ========================================
+   Dark Mode Colors
+   ======================================== */
+[data-theme="dark"] {
+    --bg: #0f172a;
+    --bg-light: #1e293b;
+    --text: #f1f5f9;
+    --text-light: #94a3b8;
+    --primary: #3b82f6;
+    --primary-dark: #2563eb;
+    --secondary: #f8fafc;
+    --border: #334155;
+    --shadow: rgba(0, 0, 0, 0.3);
+    --shadow-hover: rgba(0, 0, 0, 0.4);
+    --footer-bg: #020617;
+    --footer-text: #64748b;
+    --footer-border: #1e293b;
+    --sidebar-bg: #1e293b;
+    --overlay-bg: rgba(0, 0, 0, 0.7);
+    --card-bg: #1e293b;
+    --input-bg: #1e293b;
+    --input-border: #334155;
+    --success-bg: #064e3b;
+    --success-text: #6ee7b7;
+    --error-bg: #7f1d1d;
+    --error-text: #fca5a5;
+}
+
+/* ========================================
+   Smooth Transitions
+   ======================================== */
+* {
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Exclude certain elements from transitions for performance */
+img, svg, video, canvas {
+    transition: none;
+}
+
+/* ========================================
+   Body & Base Elements
+   ======================================== */
+body {
+    background-color: var(--bg);
+    color: var(--text);
+}
+
+/* ========================================
+   Header & Navigation
+   ======================================== */
+header {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+}
+
+.nav-center {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+[data-theme="dark"] header {
+    background: rgba(15, 23, 42, 0.95);
+}
+
+.logo {
+    color: var(--secondary);
+}
+
+[data-theme="dark"] .logo {
+    color: var(--secondary);
+}
+
+.logo span {
+    color: var(--primary);
+}
+
+.hamburger span {
+    background: var(--secondary);
+}
+
+.nav-links a {
+    color: var(--text);
+}
+
+.nav-links a:hover {
+    color: var(--primary);
+}
+
+/* ========================================
+   Sidebar Navigation
+   ======================================== */
+.sidebar {
+    background: var(--sidebar-bg);
+    box-shadow: -2px 0 10px var(--shadow);
+}
+
+[data-theme="dark"] .sidebar {
+    background: var(--sidebar-bg);
+}
+
+.sidebar-header {
+    border-bottom: 1px solid var(--border);
+}
+
+.sidebar-close {
+    color: var(--text-light);
+}
+
+.sidebar-nav a {
+    color: var(--text);
+}
+
+.sidebar-nav a:hover {
+    background: var(--bg-light);
+    color: var(--primary);
+}
+
+.sidebar-nav a.active {
+    background: var(--primary);
+    color: white;
+}
+
+.sidebar-overlay {
+    background: var(--overlay-bg);
+}
+
+/* ========================================
+   Theme Toggle Button
+   ======================================== */
+.theme-toggle {
+    background: none;
+    border: 2px solid var(--border);
+    border-radius: 50%;
+    width: 44px;
+    height: 44px;
+    font-size: 1.25rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 1rem;
+    transition: all 0.3s ease;
+    background-color: var(--bg);
+}
+
+.theme-toggle:hover {
+    background-color: var(--bg-light);
+    border-color: var(--primary);
+    transform: scale(1.05);
+}
+
+.theme-toggle:focus {
+    outline: 3px solid var(--primary);
+    outline-offset: 2px;
+}
+
+.theme-toggle:focus:not(:focus-visible) {
+    outline: none;
+}
+
+.theme-toggle:focus-visible {
+    outline: 3px solid var(--primary);
+    outline-offset: 2px;
+}
+
+/* ========================================
+   Hero Section
+   ======================================== */
+.hero {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+/* ========================================
+   Featured Blog Post (Light Mode Card)
+   ======================================== */
+.featured-blog {
+    background: rgba(255, 255, 255, 0.95);
+}
+
+[data-theme="dark"] .featured-blog {
+    background: rgba(30, 41, 59, 0.95);
+}
+
+.featured-blog h3 {
+    color: var(--secondary);
+}
+
+[data-theme="dark"] .featured-blog h3 {
+    color: var(--secondary);
+}
+
+.featured-blog p {
+    color: var(--text-light);
+}
+
+.featured-blog-meta {
+    color: var(--text-light);
+}
+
+.read-more-btn {
+    color: var(--primary);
+}
+
+/* ========================================
+   Newsletter Form
+   ======================================== */
+.newsletter-form input[type="email"] {
+    background: var(--input-bg);
+    border: 2px solid var(--input-border);
+    color: var(--text);
+}
+
+.newsletter-form input[type="email"]:focus {
+    border-color: var(--primary);
+}
+
+.newsletter-form button {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #FFFFFF;
+}
+
+.consent-text {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.consent-text a {
+    color: white;
+}
+
+/* ========================================
+   Projects Section
+   ======================================== */
+.projects {
+    background: var(--bg-light);
+}
+
+.project-card {
+    background: var(--card-bg);
+    box-shadow: 0 4px 6px var(--shadow);
+}
+
+.project-card:hover {
+    box-shadow: 0 10px 20px var(--shadow-hover);
+}
+
+.project-content h3 {
+    color: var(--secondary);
+}
+
+[data-theme="dark"] .project-content h3 {
+    color: var(--secondary);
+}
+
+.project-content p {
+    color: var(--text-light);
+}
+
+.tag {
+    background: var(--bg-light);
+    color: var(--text-light);
+}
+
+/* ========================================
+   Features Section
+   ======================================== */
+.features {
+    background: var(--bg);
+}
+
+.feature-card h3 {
+    color: var(--secondary);
+}
+
+[data-theme="dark"] .feature-card h3 {
+    color: var(--secondary);
+}
+
+.feature-card p {
+    color: var(--text-light);
+}
+
+/* ========================================
+   Footer
+   ======================================== */
+footer {
+    background: var(--footer-bg);
+    color: white;
+}
+
+.footer-section a {
+    color: var(--footer-text);
+}
+
+.footer-section a:hover {
+    color: white;
+}
+
+.footer-bottom {
+    border-top: 1px solid var(--footer-border);
+    color: var(--footer-text);
+}
+
+/* ========================================
+   Blog Page Specific
+   ======================================== */
+.featured-section {
+    background: var(--bg-light);
+}
+
+.featured-post {
+    background: var(--card-bg);
+    box-shadow: 0 10px 30px var(--shadow);
+}
+
+.featured-post:hover {
+    box-shadow: 0 15px 40px var(--shadow-hover);
+}
+
+.featured-post h2 {
+    color: var(--secondary);
+}
+
+[data-theme="dark"] .featured-post h2 {
+    color: var(--secondary);
+}
+
+.featured-post p {
+    color: var(--text-light);
+}
+
+.featured-post-meta {
+    color: var(--text-light);
+}
+
+.blog-section {
+    background: var(--bg);
+}
+
+.blog-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    box-shadow: 0 4px 6px var(--shadow);
+}
+
+.blog-card:hover {
+    box-shadow: 0 10px 20px var(--shadow-hover);
+}
+
+.blog-card h3 {
+    color: var(--secondary);
+}
+
+[data-theme="dark"] .blog-card h3 {
+    color: var(--secondary);
+}
+
+.blog-card p {
+    color: var(--text-light);
+}
+
+.blog-card-meta {
+    color: var(--text-light);
+}
+
+.read-more {
+    color: var(--primary);
+}
+
+.read-more:hover {
+    color: var(--primary-dark);
+}
+
+/* ========================================
+   About Page Specific
+   ======================================== */
+.about-section {
+    background: var(--bg-light);
+}
+
+.about-content {
+    background: var(--card-bg);
+    box-shadow: 0 4px 6px var(--shadow);
+}
+
+.about-content h2 {
+    color: var(--secondary);
+}
+
+[data-theme="dark"] .about-content h2 {
+    color: var(--secondary);
+}
+
+.value-card {
+    background: var(--bg-light);
+}
+
+.value-card h3 {
+    color: var(--secondary);
+}
+
+[data-theme="dark"] .value-card h3 {
+    color: var(--secondary);
+}
+
+.value-card p {
+    color: var(--text-light);
+}
+
+.team-section {
+    background: var(--bg);
+}
+
+.team-card {
+    background: var(--bg-light);
+}
+
+.team-card h3 {
+    color: var(--secondary);
+}
+
+[data-theme="dark"] .team-card h3 {
+    color: var(--secondary);
+}
+
+.team-card .role {
+    color: var(--primary);
+}
+
+.team-card p {
+    color: var(--text-light);
+}
+
+/* ========================================
+   Contact Page Specific
+   ======================================== */
+.contact-section {
+    background: var(--bg-light);
+}
+
+.contact-content {
+    background: var(--card-bg);
+    box-shadow: 0 4px 6px var(--shadow);
+}
+
+.contact-content h2 {
+    color: var(--secondary);
+}
+
+[data-theme="dark"] .contact-content h2 {
+    color: var(--secondary);
+}
+
+.contact-info-card {
+    background: var(--bg-light);
+}
+
+.contact-info-card h3 {
+    color: var(--secondary);
+}
+
+[data-theme="dark"] .contact-info-card h3 {
+    color: var(--secondary);
+}
+
+.contact-info-card p {
+    color: var(--text-light);
+}
+
+.contact-info-card a {
+    color: var(--primary);
+}
+
+.form-group label {
+    color: var(--text);
+}
+
+.form-group input,
+.form-group textarea {
+    background: var(--input-bg);
+    border: 2px solid var(--input-border);
+    color: var(--text);
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: var(--primary);
+}
+
+/* ========================================
+   Impressum & Datenschutz Pages
+   ======================================== */
+.legal-section {
+    background: var(--bg-light);
+}
+
+.legal-content {
+    background: var(--card-bg);
+    box-shadow: 0 4px 6px var(--shadow);
+}
+
+.legal-content h1,
+.legal-content h2,
+.legal-content h3 {
+    color: var(--secondary);
+}
+
+[data-theme="dark"] .legal-content h1,
+[data-theme="dark"] .legal-content h2,
+[data-theme="dark"] .legal-content h3 {
+    color: var(--secondary);
+}
+
+.legal-content p,
+.legal-content li {
+    color: var(--text);
+}
+
+.legal-content a {
+    color: var(--primary);
+}
+
+.legal-content strong {
+    color: var(--text);
+}
+
+/* ========================================
+   Blog Post Pages
+   ======================================== */
+.post-content {
+    background: var(--card-bg);
+    box-shadow: 0 4px 6px var(--shadow);
+}
+
+.post-content h1,
+.post-content h2,
+.post-content h3 {
+    color: var(--secondary);
+}
+
+[data-theme="dark"] .post-content h1,
+[data-theme="dark"] .post-content h2,
+[data-theme="dark"] .post-content h3 {
+    color: var(--secondary);
+}
+
+.post-content p,
+.post-content li {
+    color: var(--text);
+}
+
+.post-content a {
+    color: var(--primary);
+}
+
+.post-content blockquote {
+    border-left-color: var(--primary);
+    background: var(--bg-light);
+    color: var(--text-light);
+}
+
+.post-content code {
+    background: var(--bg-light);
+    color: var(--text);
+}
+
+.post-content pre {
+    background: var(--bg-light);
+    color: var(--text);
+}
+
+.post-meta {
+    color: var(--text-light);
+}
+
+/* ========================================
+   Form Messages
+   ======================================== */
+#form-message {
+    border-radius: 8px;
+}
+
+#form-message[style*="background: rgb(209, 250, 229)"],
+#form-message[style*="background: #d1fae5"] {
+    background: var(--success-bg) !important;
+    color: var(--success-text) !important;
+}
+
+#form-message[style*="background: rgb(254, 226, 226)"],
+#form-message[style*="background: #fee2e2"] {
+    background: var(--error-bg) !important;
+    color: var(--error-text) !important;
+}
+
+/* ========================================
+   Print Styles
+   ======================================== */
+@media print {
+    :root, [data-theme="dark"] {
+        --bg: #ffffff;
+        --text: #000000;
+        --bg-light: #f5f5f5;
+    }
+    
+    .theme-toggle,
+    .hamburger,
+    .sidebar {
+        display: none !important;
+    }
+}
