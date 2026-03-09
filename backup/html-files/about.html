@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Über uns | AI Insights - Ihr Partner für KI-Innovationen</title>
+    <meta name="description" content="Lernen Sie das Team hinter AI Insights kennen. Wir sind Experten für Künstliche Intelligenz und Softwareentwicklung.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/theme.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Header with Hamburger */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            z-index: 1000;
+            padding: 1rem 2rem;
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--secondary);
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--primary);
+        }
+
+        .nav-center {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+            background: none;
+            border: none;
+            padding: 5px;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: var(--secondary);
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a.active {
+            color: var(--primary);
+        }
+
+        /* Theme toggle in nav */
+        @media (min-width: 769px) {
+            .nav-links {
+                margin-right: 1rem;
+            }
+        }
+
+        /* Sidebar Navigation */
+        .sidebar-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1001;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .sidebar-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: -300px;
+            width: 300px;
+            height: 100vh;
+            background: white;
+            z-index: 1002;
+            transition: left 0.3s ease;
+            padding: 2rem;
+            overflow-y: auto;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .sidebar.active {
+            left: 0;
+        }
+
+        .sidebar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .sidebar-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-light);
+        }
+
+        .sidebar-nav {
+            list-style: none;
+        }
+
+        .sidebar-nav li {
+            margin-bottom: 0.5rem;
+        }
+
+        .sidebar-nav a {
+            display: block;
+            padding: 0.75rem 1rem;
+            color: var(--text);
+            text-decoration: none;
+            border-radius: 6px;
+            transition: background 0.2s, color 0.2s;
+            font-weight: 500;
+        }
+
+        .sidebar-nav a:hover {
+            background: var(--bg-light);
+            color: var(--primary);
+        }
+
+        .sidebar-nav a.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 8rem 2rem 4rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            max-width: 600px;
+            margin: 0 auto;
+            opacity: 0.95;
+        }
+
+        /* About Content */
+        .about-section {
+            padding: 5rem 2rem;
+            background: var(--bg-light);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .about-content {
+            background: white;
+            padding: 3rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+            margin-bottom: 3rem;
+        }
+
+        .about-content h2 {
+            font-size: 2rem;
+            color: var(--secondary);
+            margin-bottom: 1.5rem;
+        }
+
+        .about-content p {
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .value-card {
+            text-align: center;
+            padding: 2rem;
+            background: var(--bg-light);
+            border-radius: 8px;
+        }
+
+        .value-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .value-card h3 {
+            font-size: 1.25rem;
+            color: var(--secondary);
+            margin-bottom: 0.75rem;
+        }
+
+        .value-card p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+
+        /* Team Section */
+        .team-section {
+            padding: 5rem 2rem;
+            background: white;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+
+        .section-title p {
+            color: var(--text-light);
+            font-size: 1.125rem;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .team-card {
+            text-align: center;
+            padding: 2rem;
+            background: var(--bg-light);
+            border-radius: 12px;
+            transition: transform 0.3s;
+        }
+
+        .team-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .team-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 0 auto 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: white;
+        }
+
+        .team-card h3 {
+            font-size: 1.25rem;
+            color: var(--secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .team-card .role {
+            color: var(--primary);
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+
+        .team-card p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--secondary);
+            color: white;
+            padding: 3rem 2rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-section h4 {
+            font-size: 1.125rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section a {
+            color: #94a3b8;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .footer-section a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 2rem auto 0;
+            padding-top: 2rem;
+            border-top: 1px solid #334155;
+            text-align: center;
+            color: #94a3b8;
+            font-size: 0.875rem;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .about-content {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Fixed Header -->
+    <header>
+        <nav>
+            <a href="index.html" class="logo">AI<span>Insights</span></a>
+            <div class="nav-center">
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="index.html#projekte">Projekte</a></li>
+                    <li><a href="about.html" class="active">Über uns</a></li>
+                    <li><a href="contact.html">Kontakt</a></li>
+                </ul>
+                <button class="theme-toggle" id="theme-toggle" aria-label="Zum dunklen Modus wechseln" onclick="toggleTheme()">🌙</button>
+            </div>
+            <button class="hamburger" aria-label="Menü öffnen" onclick="toggleSidebar()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <a href="index.html" class="logo">AI<span>Insights</span></a>
+            <button class="sidebar-close" aria-label="Menü schließen" onclick="toggleSidebar()">&times;</button>
+        </div>
+        <ul class="sidebar-nav">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="index.html#projekte">Projekte</a></li>
+            <li><a href="about.html" class="active">Über uns</a></li>
+            <li><a href="contact.html">Kontakt</a></li>
+            <li><a href="impressum.html">Impressum</a></li>
+            <li><a href="datenschutz.html">Datenschutz</a></li>
+        </ul>
+        <!-- Theme toggle in sidebar -->
+        <div style="margin-top: 2rem; padding-top: 1rem; border-top: 1px solid var(--border);">
+            <button class="theme-toggle" id="theme-toggle-sidebar" aria-label="Zum dunklen Modus wechseln" onclick="toggleTheme()" style="width: 100%; margin-left: 0;">🌙 Dunkler Modus</button>
+        </div>
+    </aside>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Über AI Insights</h1>
+        <p>Wir sind ein Team von KI-Enthusiasten und Softwareentwicklern, die die Zukunft gestalten</p>
+    </section>
+
+    <!-- About Content -->
+    <section class="about-section">
+        <div class="container">
+            <div class="about-content">
+                <h2>Unsere Mission</h2>
+                <p>AI Insights wurde mit der Vision gegründet, Künstliche Intelligenz für Unternehmen aller Größen zugänglich zu machen. Wir glauben, dass KI-Technologien das Potenzial haben, Geschäftsprozesse zu revolutionieren und innovative Lösungen für komplexe Probleme zu schaffen.</p>
+
+                <p>Unser Team besteht aus erfahrenen Data Scientists, Softwareentwicklern und Branchenexperten, die gemeinsam an der Schnittstelle von Forschung und praktischer Anwendung arbeiten. Wir entwickeln nicht nur fortschrittliche KI-Lösungen, sondern teilen auch unser Wissen durch unseren Newsletter und Blog.</p>
+
+                <h2 style="margin-top: 2rem;">Was uns antreibt</h2>
+                <p>In einer sich schnell wandelnden technologischen Landschaft bleiben wir neugierig und lernbereit. Jedes Projekt ist für uns eine Gelegenheit, neue Erkenntnisse zu gewinnen und unsere Lösungen kontinuierlich zu verbessern. Wir arbeiten eng mit unseren Kunden zusammen, um maßgeschneiderte Lösungen zu entwickeln, die echten Mehrwert bieten.</p>
+            </div>
+
+            <div class="values-grid">
+                <div class="value-card">
+                    <div class="value-icon">💡</div>
+                    <h3>Innovation</h3>
+                    <p>Wir bleiben an der Spitze der KI-Forschung und setzen neueste Erkenntnisse in praktische Lösungen um.</p>
+                </div>
+
+                <div class="value-card">
+                    <div class="value-icon">🤝</div>
+                    <h3>Transparenz</h3>
+                    <p>Wir erklären unsere KI-Systeme verständlich und sorgen für nachvollziehbare Entscheidungen.</p>
+                </div>
+
+                <div class="value-card">
+                    <div class="value-icon">🎯</div>
+                    <h3>Pragmatismus</h3>
+                    <p>Wir fokussieren uns auf Lösungen, die echten Geschäftswert liefern — nicht auf Technologie um ihrer selbst willen.</p>
+                </div>
+
+                <div class="value-card">
+                    <div class="value-icon">🔒</div>
+                    <h3>Verantwortung</h3>
+                    <p>Wir entwickeln KI-Systeme, die ethischen Standards entsprechen und die Privatsphäre respektieren.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="team-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Unser Team</h2>
+                <p>Lernen Sie die Köpfe hinter AI Insights kennen</p>
+            </div>
+
+            <div class="team-grid">
+                <div class="team-card">
+                    <div class="team-avatar">👨‍💼</div>
+                    <h3>Dr. Michael Weber</h3>
+                    <div class="role">CEO & Founder</div>
+                    <p>Promovierter KI-Forscher mit 15 Jahren Erfahrung in Machine Learning und Unternehmensberatung.</p>
+                </div>
+
+                <div class="team-card">
+                    <div class="team-avatar">👩‍💻</div>
+                    <h3>Dr. Anna Weber</h3>
+                    <div class="role">Head of Research</div>
+                    <p>Expertin für Generative AI und Natural Language Processing. Veröffentlicht regelmäßig in führenden Fachzeitschriften.</p>
+                </div>
+
+                <div class="team-card">
+                    <div class="team-avatar">👨‍💻</div>
+                    <h3>Markus Schmidt</h3>
+                    <div class="role">Lead Developer</div>
+                    <p>Vollstack-Entwickler mit Schwerpunkt auf skalierbaren KI-Systemen und Cloud-Architekturen.</p>
+                </div>
+
+                <div class="team-card">
+                    <div class="team-avatar">👩‍🔬</div>
+                    <h3>Dr. Sarah Klein</h3>
+                    <div class="role">Security Expert</div>
+                    <p>Spezialisiert auf KI-Sicherheit und Adversarial Machine Learning. Beraterin für regulatorische Compliance.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>AI Insights</h4>
+                <p style="color: #94a3b8; margin-top: 0.5rem;">Ihr Partner für KI-Innovationen und Softwareentwicklung.</p>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Navigation</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="index.html#projekte">Projekte</a></li>
+                    <li><a href="about.html">Über uns</a></li>
+                    <li><a href="contact.html">Kontakt</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Rechtliches</h4>
+                <ul>
+                    <li><a href="impressum.html">Impressum</a></li>
+                    <li><a href="datenschutz.html">Datenschutz</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Kontakt</h4>
+                <ul>
+                    <li><a href="mailto:info@example.de">info@example.de</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2026 AI Insights. Alle Rechte vorbehalten.</p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('sidebarOverlay');
+            sidebar.classList.toggle('active');
+            overlay.classList.toggle('active');
+            document.body.style.overflow = sidebar.classList.contains('active') ? 'hidden' : '';
+        }
+
+        // Close sidebar on escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                const sidebar = document.getElementById('sidebar');
+                if (sidebar.classList.contains('active')) {
+                    toggleSidebar();
+                }
+            }
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Initialize theme toggle button text on load
+        document.addEventListener('DOMContentLoaded', function() {
+            const theme = document.documentElement.getAttribute('data-theme') || 'light';
+            const toggleBtn = document.getElementById('theme-toggle');
+            const toggleBtnSidebar = document.getElementById('theme-toggle-sidebar');
+            if (toggleBtn) {
+                toggleBtn.innerHTML = theme === 'dark' ? '☀️' : '🌙';
+                toggleBtn.setAttribute('aria-label', theme === 'dark' ? 'Zum hellen Modus wechseln' : 'Zum dunklen Modus wechseln');
+            }
+            if (toggleBtnSidebar) {
+                toggleBtnSidebar.innerHTML = theme === 'dark' ? '☀️ Heller Modus' : '🌙 Dunkler Modus';
+                toggleBtnSidebar.setAttribute('aria-label', theme === 'dark' ? 'Zum hellen Modus wechseln' : 'Zum dunklen Modus wechseln');
+            }
+        });
+    </script>
+    
+    <!-- Theme Toggle Script -->
+    <script src="assets/theme-toggle.js"></script>
+    <!-- Cookie Consent -->
+    <script src="/assets/cookie-consent.js"></script>
+  </body>
+</html>

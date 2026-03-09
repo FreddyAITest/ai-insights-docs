@@ -1,0 +1,131 @@
+{
+  "dashboard": {
+    "name": "Strategic Oversight Dashboard",
+    "version": "1.0.0",
+    "refreshInterval": 60,
+    "timezone": "UTC"
+  },
+  "metrics": {
+    "activeSubagents": {
+      "enabled": true,
+      "display": "counter",
+      "alertThreshold": 10,
+      "description": "Number of currently running subagents"
+    },
+    "tasksCompleted": {
+      "enabled": true,
+      "display": "counter",
+      "periods": ["today", "week"],
+      "description": "Tasks completed in specified period"
+    },
+    "avgCompletionTime": {
+      "enabled": true,
+      "display": "duration",
+      "unit": "minutes",
+      "description": "Average task completion time"
+    },
+    "checkpointFrequency": {
+      "enabled": true,
+      "display": "duration",
+      "unit": "minutes",
+      "alertThreshold": 15,
+      "description": "Average time between checkpoint saves"
+    },
+    "publishingWorkflowPassRate": {
+      "enabled": true,
+      "display": "percentage",
+      "alertThreshold": 90,
+      "description": "Percentage of tasks passing publishing workflow on first attempt"
+    },
+    "apiUsage": {
+      "enabled": true,
+      "display": "breakdown",
+      "services": ["tavily", "brevo", "clawhub", "telegram"],
+      "alertThreshold": 80,
+      "description": "API usage by service (% of quota)"
+    },
+    "tokenUsage": {
+      "enabled": true,
+      "display": "breakdown",
+      "byBot": ["main", "oversight", "subagents"],
+      "description": "Token consumption by bot"
+    },
+    "costTracking": {
+      "enabled": true,
+      "display": "currency",
+      "currency": "USD",
+      "periods": ["today", "week", "month"],
+      "description": "Cost tracking by period"
+    }
+  },
+  "alerts": {
+    "enabled": true,
+    "channel": "telegram",
+    "severityLevels": {
+      "critical": "🔴 URGENT",
+      "warning": "🟡 NOTICE",
+      "info": "🟢 INFO"
+    }
+  },
+  "reports": {
+    "daily": {
+      "enabled": true,
+      "schedule": "0 8 * * *",
+      "timezone": "UTC",
+      "recipients": ["telegram:8530872637"],
+      "sections": [
+        "tasksCompleted",
+        "tasksInProgress",
+        "blockers",
+        "resourceUsage",
+        "keyDecisions"
+      ]
+    },
+    "weekly": {
+      "enabled": true,
+      "schedule": "0 9 * * 1",
+      "timezone": "UTC",
+      "recipients": ["telegram:8530872637"],
+      "sections": [
+        "accomplishments",
+        "progressTowardGoals",
+        "resourceSummary",
+        "strategicRecommendations"
+      ]
+    }
+  },
+  "views": {
+    "overview": {
+      "name": "Overview",
+      "widgets": [
+        "activeSubagents",
+        "tasksCompletedToday",
+        "tasksCompletedWeek",
+        "avgCompletionTime"
+      ]
+    },
+    "performance": {
+      "name": "Performance",
+      "widgets": [
+        "checkpointFrequency",
+        "publishingWorkflowPassRate",
+        "avgCompletionTime"
+      ]
+    },
+    "resources": {
+      "name": "Resources",
+      "widgets": [
+        "apiUsage",
+        "tokenUsage",
+        "costTracking"
+      ]
+    },
+    "alerts": {
+      "name": "Active Alerts",
+      "widgets": [
+        "currentAlerts",
+        "alertHistory"
+      ]
+    }
+  }
+}

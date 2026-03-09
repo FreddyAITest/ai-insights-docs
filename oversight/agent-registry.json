@@ -1,0 +1,160 @@
+{
+  "version": "1.0",
+  "description": "AI Insights Multi-Agent Team Registry",
+  "manager": "strategic-oversight",
+  "workers": {
+    "web-designer": {
+      "agentId": "web-designer",
+      "displayName": "Web Designer",
+      "description": "Creates and maintains websites, landing pages, and web applications",
+      "capabilities": [
+        "html",
+        "css",
+        "javascript",
+        "react",
+        "responsive-design",
+        "deployment",
+        "github-pages"
+      ],
+      "skills": [
+        "web",
+        "frontend-design-3",
+        "web-deploy-github",
+        "website"
+      ],
+      "maxRuntime": 7200,
+      "retryCount": 3,
+      "checkpointInterval": 900,
+      "enabled": true
+    },
+    "blog-manager": {
+      "agentId": "blog-manager",
+      "displayName": "Blog Post Manager",
+      "description": "Manages blog content strategy, editorial calendar, and publishing workflow",
+      "capabilities": [
+        "content-strategy",
+        "editorial-calendar",
+        "seo-planning",
+        "publishing-workflow",
+        "quality-review"
+      ],
+      "skills": [
+        "blog-master",
+        "technical-blog-writing",
+        "business-writing"
+      ],
+      "maxRuntime": 3600,
+      "retryCount": 2,
+      "checkpointInterval": 600,
+      "enabled": true
+    },
+    "blog-writer": {
+      "agentId": "blog-writer",
+      "displayName": "Blog Post Writer",
+      "description": "Writes engaging blog posts with SEO optimization",
+      "capabilities": [
+        "blog-writing",
+        "seo-optimization",
+        "technical-writing",
+        "copywriting",
+        "formatting"
+      ],
+      "skills": [
+        "blog-master",
+        "technical-blog-writing",
+        "writing",
+        "writing-assistant"
+      ],
+      "maxRuntime": 5400,
+      "retryCount": 2,
+      "checkpointInterval": 600,
+      "enabled": true
+    },
+    "blog-researcher": {
+      "agentId": "blog-researcher",
+      "displayName": "Blog Researcher",
+      "description": "Researches topics, gathers sources, and provides insights for blog content",
+      "capabilities": [
+        "web-research",
+        "source-verification",
+        "data-gathering",
+        "fact-checking",
+        "competitive-analysis"
+      ],
+      "skills": [
+        "deep-research-pro",
+        "in-depth-research",
+        "market-research"
+      ],
+      "maxRuntime": 5400,
+      "retryCount": 3,
+      "checkpointInterval": 600,
+      "enabled": true
+    },
+    "personal-assistant": {
+      "agentId": "personal-assistant",
+      "displayName": "Personal Assistant",
+      "description": "Manages personal tasks, todo lists, schedules, and private information",
+      "capabilities": [
+        "todo-management",
+        "task-tracking",
+        "scheduling",
+        "reminders",
+        "personal-organization",
+        "note-taking"
+      ],
+      "skills": [
+        "todo-manager",
+        "todo-management",
+        "todoist",
+        "writing-assistant"
+      ],
+      "maxRuntime": 86400,
+      "retryCount": 2,
+      "checkpointInterval": 1800,
+      "enabled": true,
+      "securityLevel": "high"
+    }
+  },
+  "routing": {
+    "defaultWorker": "personal-assistant",
+    "keywordRules": [
+      {
+        "keywords": ["website", "web", "html", "css", "react", "landing page", "deploy"],
+        "worker": "web-designer"
+      },
+      {
+        "keywords": ["blog strategy", "editorial", "content calendar", "publish schedule"],
+        "worker": "blog-manager"
+      },
+      {
+        "keywords": ["write blog", "blog post", "article", "seo content"],
+        "worker": "blog-writer"
+      },
+      {
+        "keywords": ["research", "sources", "facts", "data", "analyze"],
+        "worker": "blog-researcher"
+      },
+      {
+        "keywords": ["todo", "task", "reminder", "schedule", "personal", "organize"],
+        "worker": "personal-assistant"
+      }
+    ]
+  },
+  "alerts": {
+    "channels": ["telegram"],
+    "notifyOn": [
+      "worker-crash",
+      "task-failure",
+      "max-retry-exceeded",
+      "long-runtime-warning",
+      "quality-check-failed"
+    ],
+    "quietHours": {
+      "enabled": true,
+      "start": "20:00",
+      "end": "09:00",
+      "timezone": "Europe/Berlin"
+    }
+  }
+}

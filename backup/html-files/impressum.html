@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Impressum | AI Insights</title>
+    <meta name="robots" content="noindex, follow">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/theme.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #2563eb;
+            --secondary: #0f172a;
+            --text: #334155;
+            --text-light: #64748b;
+            --bg: #ffffff;
+            --border: #e2e8f0;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: var(--text);
+            line-height: 1.8;
+            background: var(--bg);
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            z-index: 1000;
+            padding: 1rem 2rem;
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--secondary);
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--primary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        }
+
+        /* Theme toggle in nav */
+        @media (min-width: 769px) {
+            .nav-links {
+                margin-right: 1rem;
+            }
+
+        /* Hamburger Menu */
+        .nav-center {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 4px;
+            padding: 8px;
+        }
+
+        .hamburger span {
+            width: 24px;
+            height: 2px;
+            background: var(--secondary);
+            transition: all 0.3s;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
+
+        main {
+            padding: 8rem 2rem 4rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: var(--secondary);
+            margin-bottom: 2rem;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            color: var(--secondary);
+            margin: 2rem 0 1rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+        }
+
+        .info-box {
+            background: #f8fafc;
+            border-left: 4px solid var(--primary);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .info-box strong {
+            color: var(--secondary);
+        }
+
+        a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        footer {
+            background: var(--secondary);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            margin-top: 4rem;
+        }
+
+        footer a {
+            color: #94a3b8;
+        }
+
+        footer a:hover {
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: white;
+                flex-direction: column;
+                padding: 1rem 2rem;
+                gap: 1rem;
+                border-bottom: 1px solid var(--border);
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html" class="logo">AI<span>Insights</span></a>
+            <div class="nav-center" style="display: flex; align-items: center; gap: 2rem;">
+                <ul class="nav-links" id="nav-links">
+                    <li><a href="index.html#projekte">Projekte</a></li>
+                    <li><a href="index.html#features">Features</a></li>
+                    <li><a href="index.html#newsletter">Newsletter</a></li>
+                    <li><a href="impressum.html">Impressum</a></li>
+                </ul>
+                <button class="theme-toggle" id="theme-toggle" aria-label="Zum dunklen Modus wechseln" onclick="toggleTheme()">🌙</button>
+            </div>
+            <div class="hamburger" id="hamburger" aria-label="Menü öffnen">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <h1>Impressum</h1>
+
+        <div class="info-box">
+            <p><strong>Hinweis:</strong> Bitte ersetzen Sie die Platzhalter in eckigen Klammern durch Ihre tatsächlichen Daten.</p>
+        </div>
+
+        <h2>Angaben gemäß § 5 DDG (Digitale-Dienste-Gesetz)</h2>
+
+        <p>
+            <strong>[Vorname Nachname]</strong><br>
+            [Straße Hausnummer]<br>
+            [PLZ Ort]<br>
+            Deutschland
+        </p>
+
+        <h2>Kontakt</h2>
+
+        <p>
+            Telefon: [Telefonnummer]<br>
+            E-Mail: <a href="mailto:[E-Mail-Adresse]">[E-Mail-Adresse]</a>
+        </p>
+
+        <h2>Vertretungsberechtigter Personen</h2>
+
+        <p>
+            <strong>[Vorname Nachname]</strong><br>
+            [Position, z.B. Geschäftsführer]
+        </p>
+
+        <h2>Registereintrag (falls zutreffend)</h2>
+
+        <p>
+            Eintragung im Handelsregister<br>
+            Registergericht: [Amtsgericht]<br>
+            Registernummer: [HRB/HRA Nummer]
+        </p>
+
+        <h2>Umsatzsteuer-ID (falls vorhanden)</h2>
+
+        <p>
+            Umsatzsteuer-Identifikationsnummer gemäß § 27 a Umsatzsteuergesetz:<br>
+            <strong>[DE XXX XXX XXX]</strong>
+        </p>
+
+        <h2>Wirtschafts-Identifikationsnummer (ab Dezember 2026)</h2>
+
+        <p>
+            Wirtschafts-Identifikationsnummer (falls vorhanden):<br>
+            <strong>[W-IdNr.]</strong>
+        </p>
+
+        <h2>Berufsrechtliche Angaben (falls zutreffend)</h2>
+
+        <p>
+            [Für reglementierte Berufe wie Ärzte, Anwälte, Architekten etc.:]<br>
+            Kammer: [Name der zuständigen Kammer]<br>
+            Berufsbezeichnung: [Bezeichnung]<br>
+            Staat, in dem die Berufsbezeichnung verliehen wurde: [Staat]<br>
+            Geltende berufsrechtliche Regelungen: [Link zu den Regelungen]
+        </p>
+
+        <h2>Verantwortlich für den Inhalt nach § 55 Abs. 2 MStV</h2>
+
+        <p>
+            <strong>[Vorname Nachname]</strong><br>
+            [Straße Hausnummer]<br>
+            [PLZ Ort]
+        </p>
+
+        <h2>EU-Streitschlichtung</h2>
+
+        <p>
+            Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit: 
+            <a href="https://ec.europa.eu/consumers/odr" target="_blank" rel="noopener">https://ec.europa.eu/consumers/odr</a>.<br>
+            Unsere E-Mail-Adresse finden Sie oben im Impressum.
+        </p>
+
+        <p>
+            <em>Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.</em>
+        </p>
+
+        <h2>Haftungsausschluss</h2>
+
+        <h3>Haftung für Inhalte</h3>
+
+        <p>
+            Als Diensteanbieter sind wir gemäß § 7 Abs.1 DDG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. 
+            Nach §§ 8 bis 10 DDG sind wir als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen 
+            zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen.
+        </p>
+
+        <h3>Haftung für Links</h3>
+
+        <p>
+            Unser Angebot enthält Links zu externen Websites Dritter, auf deren Inhalte wir keinen Einfluss haben. 
+            Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen. Für die Inhalte der verlinkten Seiten 
+            ist stets der jeweilige Anbieter oder Betreiber der Seiten verantwortlich.
+        </p>
+
+        <h3>Urheberrecht</h3>
+
+        <p>
+            Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht. 
+            Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen des Urheberrechtes 
+            bedürfen der schriftlichen Zustimmung des jeweiligen Autors bzw. Erstellers.
+        </p>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 AI Insights. Alle Rechte vorbehalten.</p>
+        <p style="margin-top: 0.5rem;">
+            <a href="index.html">Zurück zur Startseite</a> | 
+            <a href="datenschutz.html">Datenschutzerklärung</a>
+        </p>
+    </footer>
+
+    <script>
+        // Hamburger menu toggle
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('nav-links');
+
+        if (hamburger && navLinks) {
+            hamburger.addEventListener('click', () => {
+                hamburger.classList.toggle('active');
+                navLinks.classList.toggle('active');
+            });
+
+            // Close menu when clicking a link
+            navLinks.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    hamburger.classList.remove('active');
+                    navLinks.classList.remove('active');
+                });
+            });
+        }
+
+        // Initialize theme toggle button text on load
+        document.addEventListener('DOMContentLoaded', function() {
+            const theme = document.documentElement.getAttribute('data-theme') || 'light';
+            const toggleBtn = document.getElementById('theme-toggle');
+            if (toggleBtn) {
+                toggleBtn.innerHTML = theme === 'dark' ? '☀️' : '🌙';
+                toggleBtn.setAttribute('aria-label', theme === 'dark' ? 'Zum hellen Modus wechseln' : 'Zum dunklen Modus wechseln');
+            }
+        });
+    </script>
+    
+    <!-- Theme Toggle Script -->
+    <script src="assets/theme-toggle.js"></script>
+</body>
+</html>

@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog | AI Insights - Neueste KI-Trends und Innovationen</title>
+    <meta name="description" content="Lesen Sie die neuesten Artikel über Künstliche Intelligenz, Machine Learning und Technologie-Trends.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/theme.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Header with Hamburger */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            z-index: 1000;
+            padding: 1rem 2rem;
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--secondary);
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--primary);
+        }
+
+        .nav-center {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+            background: none;
+            border: none;
+            padding: 5px;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: var(--secondary);
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -6px);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a.active {
+            color: var(--primary);
+        }
+
+        /* Theme toggle in nav */
+        @media (min-width: 769px) {
+            .nav-links {
+                margin-right: 1rem;
+            }
+        }
+
+        /* Sidebar Navigation */
+        .sidebar-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1001;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .sidebar-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .sidebar {
+            position: fixed;
+            top: 0;
+            right: -300px;
+            width: 300px;
+            height: 100vh;
+            background: white;
+            z-index: 1002;
+            transition: right 0.3s ease;
+            padding: 2rem;
+            overflow-y: auto;
+            box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .sidebar.active {
+            right: 0;
+        }
+
+        .sidebar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .sidebar-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-light);
+        }
+
+        .sidebar-nav {
+            list-style: none;
+        }
+
+        .sidebar-nav li {
+            margin-bottom: 0.5rem;
+        }
+
+        .sidebar-nav a {
+            display: block;
+            padding: 0.75rem 1rem;
+            color: var(--text);
+            text-decoration: none;
+            border-radius: 6px;
+            transition: background 0.2s, color 0.2s;
+            font-weight: 500;
+        }
+
+        .sidebar-nav a:hover {
+            background: var(--bg-light);
+            color: var(--primary);
+        }
+
+        .sidebar-nav a.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 8rem 2rem 4rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            max-width: 600px;
+            margin: 0 auto;
+            opacity: 0.95;
+        }
+
+        /* Featured Post Section */
+        .featured-section {
+            padding: 3rem 2rem;
+            background: var(--bg-light);
+        }
+
+        .featured-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .featured-label {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 1.5rem;
+        }
+
+        .featured-post {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            text-decoration: none;
+            color: inherit;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .featured-post:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .featured-post-image {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 6rem;
+            min-height: 300px;
+        }
+
+        .featured-post-content {
+            padding: 2.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .featured-post-meta {
+            font-size: 0.875rem;
+            color: var(--text-light);
+            margin-bottom: 1rem;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .featured-post h2 {
+            font-size: 2rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+            line-height: 1.3;
+        }
+
+        .featured-post p {
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .read-more-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        /* Blog Grid */
+        .blog-section {
+            padding: 5rem 2rem;
+            background: white;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-header h2 {
+            font-size: 2rem;
+            color: var(--secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .section-header p {
+            color: var(--text-light);
+        }
+
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .blog-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            border: 1px solid var(--border);
+        }
+
+        .blog-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .blog-card-image {
+            height: 200px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 4rem;
+        }
+
+        .blog-card-content {
+            padding: 1.5rem;
+        }
+
+        .blog-card-meta {
+            font-size: 0.875rem;
+            color: var(--text-light);
+            margin-bottom: 0.75rem;
+        }
+
+        .blog-card h3 {
+            font-size: 1.5rem;
+            color: var(--secondary);
+            margin-bottom: 0.75rem;
+            line-height: 1.3;
+        }
+
+        .blog-card p {
+            color: var(--text-light);
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .read-more {
+            color: var(--primary);
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .read-more:hover {
+            color: var(--primary-dark);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--secondary);
+            color: white;
+            padding: 3rem 2rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-section h4 {
+            font-size: 1.125rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section a {
+            color: #94a3b8;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .footer-section a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 2rem auto 0;
+            padding-top: 2rem;
+            border-top: 1px solid #334155;
+            text-align: center;
+            color: #94a3b8;
+            font-size: 0.875rem;
+        }
+
+        /* Mobile Responsive - Enhanced */
+        @media (max-width: 768px) {
+            /* Base mobile typography */
+            body {
+                font-size: 16px;
+            }
+
+            header {
+                padding: 0.75rem 1rem;
+            }
+
+            .hamburger {
+                display: flex;
+                z-index: 1003;
+                padding: 10px;
+                min-width: 44px;
+                min-height: 44px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .logo {
+                font-size: 1.25rem;
+            }
+
+            .hero {
+                padding: 6rem 1rem 3rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+                margin-bottom: 1rem;
+                line-height: 1.3;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+                line-height: 1.5;
+            }
+
+            .featured-section {
+                padding: 2rem 1rem;
+            }
+
+            .featured-label {
+                font-size: 0.8rem;
+                padding: 0.5rem 1rem;
+                min-height: 36px;
+                display: inline-flex;
+                align-items: center;
+            }
+
+            .featured-post {
+                grid-template-columns: 1fr;
+                border-radius: 12px;
+            }
+
+            .featured-post-image {
+                min-height: 220px;
+                font-size: 4rem;
+            }
+
+            .featured-post-content {
+                padding: 1.5rem;
+            }
+
+            .featured-post-meta {
+                font-size: 0.875rem;
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .featured-post h2 {
+                font-size: 1.5rem;
+                line-height: 1.3;
+                margin-bottom: 1rem;
+            }
+
+            .featured-post p {
+                font-size: 1rem;
+                line-height: 1.6;
+                margin-bottom: 1.25rem;
+            }
+
+            .read-more-btn {
+                font-size: 1rem;
+                min-height: 44px;
+                display: inline-flex;
+                align-items: center;
+                padding: 8px 0;
+            }
+
+            .blog-section {
+                padding: 3rem 1rem;
+            }
+
+            .section-header {
+                margin-bottom: 2rem;
+            }
+
+            .section-header h2 {
+                font-size: 1.75rem;
+                line-height: 1.3;
+            }
+
+            .section-header p {
+                font-size: 1rem;
+            }
+
+            .blog-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .blog-card {
+                min-width: 100%;
+                border-radius: 12px;
+            }
+
+            .blog-card-image {
+                height: 200px;
+                font-size: 4rem;
+            }
+
+            .blog-card-content {
+                padding: 1.5rem;
+            }
+
+            .blog-card-meta {
+                font-size: 0.875rem;
+            }
+
+            .blog-card h3 {
+                font-size: 1.35rem;
+                line-height: 1.3;
+                margin-bottom: 0.75rem;
+            }
+
+            .blog-card p {
+                font-size: 1rem;
+                line-height: 1.6;
+                margin-bottom: 1rem;
+            }
+
+            .read-more {
+                font-size: 1rem;
+                min-height: 44px;
+                display: inline-flex;
+                align-items: center;
+            }
+
+            footer {
+                padding: 2rem 1rem;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .footer-section h4 {
+                font-size: 1.125rem;
+            }
+
+            .footer-section a {
+                font-size: 0.95rem;
+                min-height: 44px;
+                display: inline-flex;
+                align-items: center;
+            }
+        }
+
+        /* Small mobile devices */
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 1.5rem;
+            }
+
+            .hero p {
+                font-size: 0.95rem;
+            }
+
+            .featured-post h2 {
+                font-size: 1.25rem;
+            }
+
+            .featured-post-image {
+                min-height: 160px;
+                font-size: 3rem;
+            }
+
+            .blog-card-image {
+                height: 160px;
+                font-size: 3rem;
+            }
+
+            .blog-card h3 {
+                font-size: 1.125rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Fixed Header -->
+    <header>
+        <nav>
+            <a href="index.html" class="logo">AI<span>Insights</span></a>
+            <div class="nav-center">
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="blog.html" class="active">Blog</a></li>
+                    <li><a href="index.html#projekte">Projekte</a></li>
+                    <li><a href="about.html">Über uns</a></li>
+                    <li><a href="contact.html">Kontakt</a></li>
+                </ul>
+                <button class="theme-toggle" id="theme-toggle" aria-label="Zum dunklen Modus wechseln" onclick="toggleTheme()">🌙</button>
+            </div>
+            <button class="hamburger" aria-label="Menü öffnen" onclick="toggleSidebar()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <a href="index.html" class="logo">AI<span>Insights</span></a>
+            <button class="sidebar-close" aria-label="Menü schließen" onclick="toggleSidebar()">&times;</button>
+        </div>
+        <ul class="sidebar-nav">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="blog.html" class="active">Blog</a></li>
+            <li><a href="index.html#projekte">Projekte</a></li>
+            <li><a href="about.html">Über uns</a></li>
+            <li><a href="contact.html">Kontakt</a></li>
+            <li><a href="impressum.html">Impressum</a></li>
+            <li><a href="datenschutz.html">Datenschutz</a></li>
+        </ul>
+        <!-- Theme toggle in sidebar -->
+        <div style="margin-top: 2rem; padding-top: 1rem; border-top: 1px solid var(--border);">
+            <button class="theme-toggle" id="theme-toggle-sidebar" aria-label="Zum dunklen Modus wechseln" onclick="toggleTheme()" style="width: 100%; margin-left: 0;">🌙 Dunkler Modus</button>
+        </div>
+    </aside>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Unser Blog</h1>
+        <p>Aktuelle Einblicke in KI-Technologie, Trends und Innovationen</p>
+    </section>
+
+    <!-- Featured Post Section (Latest Post) -->
+    <section class="featured-section">
+        <div class="featured-container">
+            <span class="featured-label">🔥 Neuester Artikel</span>
+            <a href="/blog/post-4.html" class="featured-post">
+                <div class="featured-post-image">🎨</div>
+                <div class="featured-post-content">
+                    <div class="featured-post-meta">
+                        <span>📅 8. März 2026</span>
+                        <span>⏱️ 25 Min. Lesezeit</span>
+                    </div>
+                    <h2>The Digital Paper Empire: AI-Powered Mass Production & Lead Generation</h2>
+                    <p>Complete guide to generating 2,000+ AI designs, automating publication across Etsy and marketplaces, and building automated lead generation systems.</p>
+                    <span class="read-more-btn">Jetzt lesen →</span>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <!-- Blog Grid (Older Posts) -->
+    <section class="blog-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Weitere Artikel</h2>
+                <p>Entdecken Sie unsere älteren Beiträge</p>
+            </div>
+            <div class="blog-grid">
+                <a href="/blog/post-1.html" class="blog-card">
+                    <div class="blog-card-image">🤖</div>
+                    <div class="blog-card-content">
+                        <div class="blog-card-meta">
+                            <span>📅 4. März 2026</span> • <span>⏱️ 8 Min. Lesezeit</span>
+                        </div>
+                        <h3>Die Zukunft der Generativen KI: Was kommt nach ChatGPT?</h3>
+                        <p>Ein tiefer Einblick in die nächsten Generationen von KI-Modellen und ihre potenziellen Anwendungen in der Unternehmenswelt.</p>
+                        <span class="read-more">Weiterlesen →</span>
+                    </div>
+                </a>
+
+                <a href="/blog/post-2.html" class="blog-card">
+                    <div class="blog-card-image">📊</div>
+                    <div class="blog-card-content">
+                        <div class="blog-card-meta">
+                            <span>📅 1. März 2026</span> • <span>⏱️ 6 Min. Lesezeit</span>
+                        </div>
+                        <h3>Machine Learning in der Praxis: Erfolgsbeispiele aus der Industrie</h3>
+                        <p>Wie Unternehmen maschinelles Lernen nutzen, um Prozesse zu optimieren und neue Geschäftsmöglichkeiten zu erschließen.</p>
+                        <span class="read-more">Weiterlesen →</span>
+                    </div>
+                </a>
+
+                <a href="/blog/post-3.html" class="blog-card">
+                    <div class="blog-card-image">🔒</div>
+                    <div class="blog-card-content">
+                        <div class="blog-card-meta">
+                            <span>📅 26. Februar 2026</span> • <span>⏱️ 7 Min. Lesezeit</span>
+                        </div>
+                        <h3>KI-Sicherheit: Herausforderungen und Lösungen für 2026</h3>
+                        <p>Welche Sicherheitsrisiken KI-Systeme mit sich bringen und wie Unternehmen sich schützen können.</p>
+                        <span class="read-more">Weiterlesen →</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>AI Insights</h4>
+                <p style="color: #94a3b8; margin-top: 0.5rem;">Ihr Partner für KI-Innovationen und Softwareentwicklung.</p>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Navigation</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="index.html#projekte">Projekte</a></li>
+                    <li><a href="about.html">Über uns</a></li>
+                    <li><a href="contact.html">Kontakt</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Rechtliches</h4>
+                <ul>
+                    <li><a href="impressum.html">Impressum</a></li>
+                    <li><a href="datenschutz.html">Datenschutz</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Kontakt</h4>
+                <ul>
+                    <li><a href="mailto:info@example.de">info@example.de</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2026 AI Insights. Alle Rechte vorbehalten.</p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('sidebarOverlay');
+            const hamburger = document.querySelector('.hamburger');
+            sidebar.classList.toggle('active');
+            overlay.classList.toggle('active');
+            hamburger.classList.toggle('active');
+            document.body.style.overflow = sidebar.classList.contains('active') ? 'hidden' : '';
+        }
+
+        // Close sidebar on escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                const sidebar = document.getElementById('sidebar');
+                if (sidebar.classList.contains('active')) {
+                    toggleSidebar();
+                }
+            }
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Initialize theme toggle button text on load
+        document.addEventListener('DOMContentLoaded', function() {
+            const theme = document.documentElement.getAttribute('data-theme') || 'light';
+            const toggleBtn = document.getElementById('theme-toggle');
+            const toggleBtnSidebar = document.getElementById('theme-toggle-sidebar');
+            if (toggleBtn) {
+                toggleBtn.innerHTML = theme === 'dark' ? '☀️' : '🌙';
+                toggleBtn.setAttribute('aria-label', theme === 'dark' ? 'Zum hellen Modus wechseln' : 'Zum dunklen Modus wechseln');
+            }
+            if (toggleBtnSidebar) {
+                toggleBtnSidebar.innerHTML = theme === 'dark' ? '☀️ Heller Modus' : '🌙 Dunkler Modus';
+                toggleBtnSidebar.setAttribute('aria-label', theme === 'dark' ? 'Zum hellen Modus wechseln' : 'Zum dunklen Modus wechseln');
+            }
+        });
+    </script>
+    
+    <!-- Theme Toggle Script -->
+    <script src="../assets/theme-toggle.js"></script>
+    <!-- Cookie Consent -->
+    <script src="/assets/cookie-consent.js"></script>
+  </body>
+</html>

@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kontakt | AI Insights - Schreiben Sie uns</title>
+    <meta name="description" content="Kontaktieren Sie AI Insights für Fragen zu unseren KI-Lösungen, Projekten oder Partnerschaften.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/theme.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Header with Hamburger */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            z-index: 1000;
+            padding: 1rem 2rem;
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--secondary);
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--primary);
+        }
+
+        .nav-center {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+            background: none;
+            border: none;
+            padding: 5px;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: var(--secondary);
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        /* Theme toggle in nav */
+        @media (min-width: 769px) {
+            .nav-links {
+                margin-right: 1rem;
+            }
+        }
+
+        .nav-links a.active {
+            color: var(--primary);
+        }
+
+        /* Sidebar Navigation */
+        .sidebar-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1001;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .sidebar-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: -300px;
+            width: 300px;
+            height: 100vh;
+            background: white;
+            z-index: 1002;
+            transition: left 0.3s ease;
+            padding: 2rem;
+            overflow-y: auto;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .sidebar.active {
+            left: 0;
+        }
+
+        .sidebar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .sidebar-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-light);
+        }
+
+        .sidebar-nav {
+            list-style: none;
+        }
+
+        .sidebar-nav li {
+            margin-bottom: 0.5rem;
+        }
+
+        .sidebar-nav a {
+            display: block;
+            padding: 0.75rem 1rem;
+            color: var(--text);
+            text-decoration: none;
+            border-radius: 6px;
+            transition: background 0.2s, color 0.2s;
+            font-weight: 500;
+        }
+
+        .sidebar-nav a:hover {
+            background: var(--bg-light);
+            color: var(--primary);
+        }
+
+        .sidebar-nav a.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 8rem 2rem 4rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            max-width: 600px;
+            margin: 0 auto;
+            opacity: 0.95;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            padding: 5rem 2rem;
+            background: var(--bg-light);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        /* Contact Form */
+        .contact-form-wrapper {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+        }
+
+        .contact-form-wrapper h2 {
+            font-size: 1.75rem;
+            color: var(--secondary);
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            color: var(--secondary);
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 0.875rem 1rem;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 1rem 2rem;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+            font-family: inherit;
+        }
+
+        .submit-btn:hover {
+            background: var(--primary-dark);
+        }
+
+        .consent-text {
+            font-size: 0.875rem;
+            color: var(--text-light);
+            margin-top: 1rem;
+            line-height: 1.5;
+        }
+
+        .consent-text a {
+            color: var(--primary);
+            text-decoration: underline;
+        }
+
+        /* Contact Info */
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .info-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+        }
+
+        .info-card h3 {
+            font-size: 1.25rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .info-card p {
+            color: var(--text-light);
+            line-height: 1.8;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .info-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .info-icon {
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .info-text strong {
+            display: block;
+            color: var(--secondary);
+            margin-bottom: 0.25rem;
+        }
+
+        .info-text a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .info-text a:hover {
+            text-decoration: underline;
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            margin-top: 4rem;
+        }
+
+        .faq-section h2 {
+            text-align: center;
+            font-size: 2rem;
+            color: var(--secondary);
+            margin-bottom: 2rem;
+        }
+
+        .faq-grid {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .faq-item {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .faq-item h3 {
+            font-size: 1.125rem;
+            color: var(--secondary);
+            margin-bottom: 0.75rem;
+        }
+
+        .faq-item p {
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--secondary);
+            color: white;
+            padding: 3rem 2rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-section h4 {
+            font-size: 1.125rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section a {
+            color: #94a3b8;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .footer-section a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 2rem auto 0;
+            padding-top: 2rem;
+            border-top: 1px solid #334155;
+            text-align: center;
+            color: #94a3b8;
+            font-size: 0.875rem;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Fixed Header -->
+    <header>
+        <nav>
+            <a href="index.html" class="logo">AI<span>Insights</span></a>
+            <div class="nav-center">
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="index.html#projekte">Projekte</a></li>
+                    <li><a href="about.html">Über uns</a></li>
+                    <li><a href="contact.html" class="active">Kontakt</a></li>
+                </ul>
+                <button class="theme-toggle" id="theme-toggle" aria-label="Zum dunklen Modus wechseln" onclick="toggleTheme()">🌙</button>
+            </div>
+            <button class="hamburger" aria-label="Menü öffnen" onclick="toggleSidebar()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <a href="index.html" class="logo">AI<span>Insights</span></a>
+            <button class="sidebar-close" aria-label="Menü schließen" onclick="toggleSidebar()">&times;</button>
+        </div>
+        <ul class="sidebar-nav">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="index.html#projekte">Projekte</a></li>
+            <li><a href="about.html">Über uns</a></li>
+            <li><a href="contact.html" class="active">Kontakt</a></li>
+            <li><a href="impressum.html">Impressum</a></li>
+            <li><a href="datenschutz.html">Datenschutz</a></li>
+        </ul>
+        <!-- Theme toggle in sidebar -->
+        <div style="margin-top: 2rem; padding-top: 1rem; border-top: 1px solid var(--border);">
+            <button class="theme-toggle" id="theme-toggle-sidebar" aria-label="Zum dunklen Modus wechseln" onclick="toggleTheme()" style="width: 100%; margin-left: 0;">🌙 Dunkler Modus</button>
+        </div>
+    </aside>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Kontaktieren Sie uns</h1>
+        <p>Wir freuen uns auf Ihre Nachricht und melden uns schnellstmöglich bei Ihnen</p>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section">
+        <div class="container">
+            <div class="contact-grid">
+                <!-- Contact Form -->
+                <div class="contact-form-wrapper">
+                    <h2>Nachricht senden</h2>
+                    <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+                        <input type="hidden" name="form-name" value="contact">
+                        <p class="hidden" aria-hidden="true">
+                            <label>Nicht ausfüllen: <input name="bot-field"></label>
+                        </p>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="firstName">Vorname *</label>
+                                <input type="text" id="firstName" name="firstName" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="lastName">Nachname *</label>
+                                <input type="text" id="lastName" name="lastName" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">E-Mail-Adresse *</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="company">Firma</label>
+                            <input type="text" id="company" name="company">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="subject">Betreff *</label>
+                            <select id="subject" name="subject" required>
+                                <option value="">Bitte wählen...</option>
+                                <option value="allgemein">Allgemeine Anfrage</option>
+                                <option value="projekt">Projektanfrage</option>
+                                <option value="partnership">Partnerschaft</option>
+                                <option value="presse">Presse/Medien</option>
+                                <option value="support">Support</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message">Nachricht *</label>
+                            <textarea id="message" name="message" required></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label style="display: flex; gap: 0.5rem; align-items: flex-start; font-weight: normal; cursor: pointer;">
+                                <input type="checkbox" name="privacy" required style="margin-top: 0.25rem; flex-shrink: 0;">
+                                <span class="consent-text">Ich habe die <a href="datenschutz.html">Datenschutzerklärung</a> gelesen und stimme zu, dass meine Angaben zur Kontaktaufnahme gespeichert werden.</span>
+                            </label>
+                        </div>
+
+                        <button type="submit" class="submit-btn">Nachricht senden</button>
+                        
+                        <!-- Success/Error Messages -->
+                        <div id="form-success" class="form-message success" style="display: none; margin-top: 1rem; padding: 1rem; background: #10b981; color: white; border-radius: 0.5rem; text-align: center;">
+                            ✅ Vielen Dank! Ihre Nachricht wurde erfolgreich gesendet. Wir melden uns in Kürze bei Ihnen.
+                        </div>
+                        <div id="form-error" class="form-message error" style="display: none; margin-top: 1rem; padding: 1rem; background: #ef4444; color: white; border-radius: 0.5rem; text-align: center;">
+                            ❌ Leider ist ein Fehler aufgetreten. Bitte versuchen Sie es später erneut oder kontaktieren Sie uns per E-Mail.
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Contact Info -->
+                <div class="contact-info">
+                    <div class="info-card">
+                        <h3>📍 Unsere Adresse</h3>
+                        <div class="info-item">
+                            <div class="info-icon">🏢</div>
+                            <div class="info-text">
+                                <strong>AI Insights GmbH</strong>
+                                <p>Musterstraße 123<br>10115 Berlin<br>Deutschland</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="info-card">
+                        <h3>📞 Kontaktmöglichkeiten</h3>
+                        <div class="info-item">
+                            <div class="info-icon">📧</div>
+                            <div class="info-text">
+                                <strong>E-Mail</strong>
+                                <a href="mailto:info@example.de">info@example.de</a>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-icon">📱</div>
+                            <div class="info-text">
+                                <strong>Telefon</strong>
+                                <a href="tel:+493012345678">+49 (0) 30 123 456 78</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="info-card">
+                        <h3>🕒 Geschäftszeiten</h3>
+                        <div class="info-item">
+                            <div class="info-icon">📅</div>
+                            <div class="info-text">
+                                <strong>Bürozeiten</strong>
+                                <p>Montag - Freitag<br>09:00 - 18:00 Uhr</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FAQ Section -->
+            <div class="faq-section">
+                <h2>Häufig gestellte Fragen</h2>
+                <div class="faq-grid">
+                    <div class="faq-item">
+                        <h3>Wie schnell erhalte ich eine Antwort?</h3>
+                        <p>Wir bemühen uns, alle Anfragen innerhalb von 24-48 Stunden während der Geschäftszeiten zu beantworten. Bei dringenden Anliegen empfehlen wir einen Anruf.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h3>Bieten Sie kostenlose Erstberatungen an?</h3>
+                        <p>Ja, wir bieten ein unverbindliches 30-minütiges Erstgespräch an, um Ihre Anforderungen kennenzulernen und mögliche Lösungsansätze zu besprechen.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h3>Mit welchen Branchen arbeiten Sie?</h3>
+                        <p>Wir arbeiten mit Unternehmen verschiedener Branchen, darunter Finanzdienstleistungen, Gesundheitswesen, Einzelhandel, Fertigung und Technologie.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h3>Unterstützen Sie auch internationale Projekte?</h3>
+                        <p>Ja, wir betreuen Kunden europaweit und bieten unsere Dienstleistungen auf Deutsch und Englisch an.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>AI Insights</h4>
+                <p style="color: #94a3b8; margin-top: 0.5rem;">Ihr Partner für KI-Innovationen und Softwareentwicklung.</p>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Navigation</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="index.html#projekte">Projekte</a></li>
+                    <li><a href="about.html">Über uns</a></li>
+                    <li><a href="contact.html">Kontakt</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Rechtliches</h4>
+                <ul>
+                    <li><a href="impressum.html">Impressum</a></li>
+                    <li><a href="datenschutz.html">Datenschutz</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Kontakt</h4>
+                <ul>
+                    <li><a href="mailto:info@example.de">info@example.de</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2026 AI Insights. Alle Rechte vorbehalten.</p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('sidebarOverlay');
+            sidebar.classList.toggle('active');
+            overlay.classList.toggle('active');
+            document.body.style.overflow = sidebar.classList.contains('active') ? 'hidden' : '';
+        }
+
+        // Close sidebar on escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                const sidebar = document.getElementById('sidebar');
+                if (sidebar.classList.contains('active')) {
+                    toggleSidebar();
+                }
+            }
+        });
+
+        // Netlify Forms: Success message
+        window.onload = function() {
+            const params = new URLSearchParams(window.location.search);
+            if (params.get('success') === 'true') {
+                const form = document.querySelector('.contact-form-wrapper form');
+                const message = document.createElement('div');
+                message.style.cssText = 'background: #10b981; color: white; padding: 2rem; border-radius: 8px; text-align: center;';
+                message.innerHTML = '<h2 style="margin-bottom: 1rem;">✅ Vielen Dank für Ihre Nachricht!</h2><p>Wir haben Ihre Anfrage erhalten und melden uns schnellstmöglich bei Ihnen.</p>';
+                form.replaceWith(message);
+                window.history.replaceState({}, document.title, window.location.pathname);
+            }
+        };
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Initialize theme toggle button text on load
+        document.addEventListener('DOMContentLoaded', function() {
+            const theme = document.documentElement.getAttribute('data-theme') || 'light';
+            const toggleBtn = document.getElementById('theme-toggle');
+            const toggleBtnSidebar = document.getElementById('theme-toggle-sidebar');
+            if (toggleBtn) {
+                toggleBtn.innerHTML = theme === 'dark' ? '☀️' : '🌙';
+                toggleBtn.setAttribute('aria-label', theme === 'dark' ? 'Zum hellen Modus wechseln' : 'Zum dunklen Modus wechseln');
+            }
+            if (toggleBtnSidebar) {
+                toggleBtnSidebar.innerHTML = theme === 'dark' ? '☀️ Heller Modus' : '🌙 Dunkler Modus';
+                toggleBtnSidebar.setAttribute('aria-label', theme === 'dark' ? 'Zum hellen Modus wechseln' : 'Zum dunklen Modus wechseln');
+            }
+        });
+    </script>
+    
+    <!-- Theme Toggle Script -->
+    <script src="assets/theme-toggle.js"></script>
+    <!-- Cookie Consent -->
+    <script src="/assets/cookie-consent.js"></script>
+  </body>
+</html>
